@@ -1,11 +1,11 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: hwpf/fapi2/include/fapi2.H $                                  */
+/* $Source: hwpf/fapi2/include/fapi2_hwp_executor.H $                     */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
-/* COPYRIGHT 2012,2020                                                    */
+/* COPYRIGHT 2015,2020                                                    */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
 /*                                                                        */
@@ -23,29 +23,26 @@
 /*                                                                        */
 /* IBM_PROLOG_END_TAG                                                     */
 ///
-/// @file fapi2.H
-/// @brief top level header for fapi2
+/// @file fapi2_hwp_executor.H
+///
+/// @brief Defines the FAPI2 HWP Executor Macro.
+///
+/// The FAPI2 HWP Executor macro is called when a PLAT invoker function or a HWP
+/// wants to execute a HWP.
 ///
 
-#ifndef __FAPI2_TOP_LEVEL__
-#define __FAPI2_TOP_LEVEL__
+#ifndef FAPI2HWPEXECUTOR_H_
+#define FAPI2HWPEXECUTOR_H_
 
-#include <target.H>
-#include <return_code.H>
-#include <buffer.H>
-#include <hw_access.H>
-#include <utils.H>
-#include <plat_trace.H>
+#include <hwp_executor.H>
 
-// In turn includes the needed generated headers (hwp_ffd_classes, etc.)
-#include <error_scope.H>
-#include <set_sbe_error.H>      // Generated file
+/**
+ * @brief HWP Executor macro
+ *
+ * This macro calls a PLAT macro which will do any platform specific work to
+ * execute the HWP (e.g. dlopening a shared library)
+ */
+#define FAPI_EXEC_HWP(RC, FUNC, _args_...) \
+    FAPI_PLAT_EXEC_HWP(RC, FUNC, ##_args_)
 
-// Block of headers not currently in fapi2
-#ifdef FAPI2_MISSING_HEADERS
-  #include <fapi2SystemConfig.H>
-  #include <mvpdAccess.H>
-  #include <mbvpdAccess.H>
-#endif
-
-#endif // __FAPI2_TOP_LEVEL__
+#endif // FAPI2HWPEXECUTOR_H_
