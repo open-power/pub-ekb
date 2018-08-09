@@ -34,11 +34,29 @@
 
 #include <plat_i2c_access.H>
 #include <fapi2_i2c_access.H>
+#include <iostream>
+#include <iomanip>
 
 namespace fapi2
 {
 ///
 /// @brief Platform-level implementation of getI2c()
+///
+/// Example use (seeprom read 8 bytes w/ 2-byte address: 0x01B0):
+/// std::vector<uint8_t> addr = {0x01, 0xB0};
+/// std::vector<uint8_t> data;
+/// size_t len = 8;
+/// FAPI_TRY(getI2c(target, len, addr, data));
+/// data should contain the 8 bytes starting at address 0x01B0
+///
+/// Example use (smbus read 5 bytes w/ 1-byte command: 0x02):
+/// std::vector<uint8_t> command = {0x02};
+/// std::vector<uint8_t> data;
+/// size_t len = 5;
+/// FAPI_TRY(getI2c(target, len, command, data));
+/// data should contain 5 bytes, first byte with the data length(4)
+/// remaining four bytes will be the data requested from the command
+///
 /// @tparam K the type (Kind) of target, from i_target
 /// @tparam V the type of the target's Value, from i_target
 /// @param[in]  i_target     HW target to operate on.
@@ -67,7 +85,7 @@ inline ReturnCode getI2c(const Target<K, V>& i_target,
 
     std::cout << std::hex << "   getI2c "
               << "target: {" << i_target.getType() << ","
-              << uint64_t(i_target) << "}; "
+              << i_target.get() << "}; "
               << "i_get_size: " << i_get_size << "; "
               << "i_data: ";
 
@@ -86,6 +104,15 @@ inline ReturnCode getI2c(const Target<K, V>& i_target,
 
 ///
 /// @brief Platform-level implementation of putI2c()
+///
+/// Example use (seeprom write 4 bytes of zeros w/ 2-byte address: 0x0208):
+/// std::vector<uint8_t> addr_data = {0x02, 0x08, 0x00, 0x00, 0x00, 0x00};
+/// FAPI_TRY(putI2c(target, addr_data));
+///
+/// Example use (smbus write 1 data length byte + 4 bytes of zeros w/ 1-byte command: 0x01):
+/// std::vector<uint8_t> command_data = {0x01, 0x04, 0x00, 0x00, 0x00, 0x00};
+/// FAPI_TRY(putI2c(target, command_data));
+///
 /// @tparam K the type (Kind) of target, from i_target
 /// @tparam V the type of the target's Value, from i_target
 /// @param[in] i_target     HW target to operate on.
@@ -98,7 +125,7 @@ inline ReturnCode putI2c(const Target<K, V>& i_target,
 {
     std::cout << std::hex << "   putI2c "
               << "target: {" << i_target.getType() << ","
-              << uint64_t(i_target) << "}; "
+              << i_target.get() << "}; "
               << "i_data: ";
 
     const uint32_t l_mask = 0xff;
