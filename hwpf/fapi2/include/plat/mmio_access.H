@@ -43,8 +43,8 @@ namespace fapi2
 {
 
 /// @brief Reads data via mmio from the target
-template< TargetType K, typename V >
-inline ReturnCode getMMIO(const Target<K, V>& i_target,
+template< TargetType K, MulticastType M, typename V >
+inline ReturnCode getMMIO(const Target<K, M, V>& i_target,
                           const uint64_t i_mmioAddr,
                           const size_t i_transSize,
                           std::vector<uint8_t>& o_data)
@@ -79,8 +79,8 @@ inline ReturnCode getMMIO(const Target<K, V>& i_target,
 }
 
 /// @brief Writes data via mmio to the target.
-template< TargetType K, typename V >
-inline ReturnCode putMMIO(const Target<K, V>& i_target,
+template< TargetType K, MulticastType M, typename V >
+inline ReturnCode putMMIO(const Target<K, M, V>& i_target,
                           const uint64_t i_mmioAddr,
                           const size_t i_transSize,
                           const std::vector<uint8_t>& i_data)
