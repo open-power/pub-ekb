@@ -1,7 +1,7 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: chips/p10/common/include/p10_scom_mcc.H $                     */
+/* $Source: chips/p10/common/include/p10_scom_pec_d.H $                   */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
@@ -25,24 +25,20 @@
 
 #include "proc_scomt.H"
 
-#ifndef __p10_scom_mcc_H_
-#define __p10_scom_mcc_H_
+#ifndef __p10_scom_pec_d_H_
+#define __p10_scom_pec_d_H_
 
-#include "p10_scom_mcc_0.H"
-#include "p10_scom_mcc_1.H"
-#include "p10_scom_mcc_2.H"
-#include "p10_scom_mcc_3.H"
-#include "p10_scom_mcc_4.H"
-#include "p10_scom_mcc_5.H"
-#include "p10_scom_mcc_6.H"
-#include "p10_scom_mcc_7.H"
-#include "p10_scom_mcc_8.H"
-#include "p10_scom_mcc_9.H"
-#include "p10_scom_mcc_a.H"
-#include "p10_scom_mcc_b.H"
-#include "p10_scom_mcc_c.H"
-#include "p10_scom_mcc_d.H"
-#include "p10_scom_mcc_e.H"
-#include "p10_scom_mcc_f.H"
 
+namespace scomt
+{
+namespace pec
+{
+
+
+static const uint64_t PRIMARY_ADDRESS_REG = 0x080f0000ull;
+// pec/reg00209.H
+
+}
+}
+#include "pec/reg00209.H"
 #endif

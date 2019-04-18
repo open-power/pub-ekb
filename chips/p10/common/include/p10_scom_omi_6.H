@@ -1,7 +1,7 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: chips/p10/common/include/p10_scom_mcc.H $                     */
+/* $Source: chips/p10/common/include/p10_scom_omi_6.H $                   */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
@@ -25,24 +25,17 @@
 
 #include "proc_scomt.H"
 
-#ifndef __p10_scom_mcc_H_
-#define __p10_scom_mcc_H_
+#ifndef __p10_scom_omi_6_H_
+#define __p10_scom_omi_6_H_
 
-#include "p10_scom_mcc_0.H"
-#include "p10_scom_mcc_1.H"
-#include "p10_scom_mcc_2.H"
-#include "p10_scom_mcc_3.H"
-#include "p10_scom_mcc_4.H"
-#include "p10_scom_mcc_5.H"
-#include "p10_scom_mcc_6.H"
-#include "p10_scom_mcc_7.H"
-#include "p10_scom_mcc_8.H"
-#include "p10_scom_mcc_9.H"
-#include "p10_scom_mcc_a.H"
-#include "p10_scom_mcc_b.H"
-#include "p10_scom_mcc_c.H"
-#include "p10_scom_mcc_d.H"
-#include "p10_scom_mcc_e.H"
-#include "p10_scom_mcc_f.H"
 
+namespace scomt
+{
+namespace omi
+{
+
+
+}
+}
+#include "omi/reg00102.H"
 #endif
