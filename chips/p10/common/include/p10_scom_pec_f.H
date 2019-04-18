@@ -1,7 +1,7 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: chips/p10/common/include/p10_scom_c.H $                       */
+/* $Source: chips/p10/common/include/p10_scom_pec_f.H $                   */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
@@ -25,24 +25,35 @@
 
 #include "proc_scomt.H"
 
-#ifndef __p10_scom_c_H_
-#define __p10_scom_c_H_
+#ifndef __p10_scom_pec_f_H_
+#define __p10_scom_pec_f_H_
 
-#include "p10_scom_c_0.H"
-#include "p10_scom_c_1.H"
-#include "p10_scom_c_2.H"
-#include "p10_scom_c_3.H"
-#include "p10_scom_c_4.H"
-#include "p10_scom_c_5.H"
-#include "p10_scom_c_6.H"
-#include "p10_scom_c_7.H"
-#include "p10_scom_c_8.H"
-#include "p10_scom_c_9.H"
-#include "p10_scom_c_a.H"
-#include "p10_scom_c_b.H"
-#include "p10_scom_c_c.H"
-#include "p10_scom_c_d.H"
-#include "p10_scom_c_e.H"
-#include "p10_scom_c_f.H"
 
+namespace scomt
+{
+namespace pec
+{
+
+
+static const uint64_t MULTICAST_GROUP_3 = 0x080f0003ull;
+
+static const uint32_t MULTICAST_GROUP_3_MULTICAST3_GROUP = 3;
+static const uint32_t MULTICAST_GROUP_3_MULTICAST3_GROUP_LEN = 3;
+// pec/reg00211.H
+
+static const uint64_t PROTECT_MODE_REG = 0x080f03feull;
+
+static const uint32_t PROTECT_MODE_REG_READ_PROTECT_ENABLE = 0;
+static const uint32_t PROTECT_MODE_REG_WRITE_PROTECT_ENABLE = 1;
+// pec/reg00211.H
+
+static const uint64_t TIMEOUT_REG = 0x080f0010ull;
+// pec/reg00211.H
+
+static const uint64_t VITAL_SCAN_OUT = 0x080f0017ull;
+// pec/reg00211.H
+
+}
+}
+#include "pec/reg00211.H"
 #endif
