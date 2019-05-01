@@ -1,7 +1,7 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: chips/p10/common/include/iohs/reg00037.H $                    */
+/* $Source: chips/p10/common/include/iohs/reg00005.H $                    */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
@@ -24,8 +24,8 @@
 /* IBM_PROLOG_END_TAG                                                     */
 #include "fapi2.H"
 
-#ifndef __IOHS_REG00037_H_
-#define __IOHS_REG00037_H_
+#ifndef __IOHS_REG00005_H_
+#define __IOHS_REG00005_H_
 
 namespace scomt
 {
@@ -64,7 +64,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_EPS_PSC_ADDR_TRAP_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -830,7 +830,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_EPS_PSC_ATOMIC_LOCK_MASK_LATCH_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -926,7 +926,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_EPS_PSC_PSCOM_STATUS_ERROR_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -4437,7 +4437,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_EPS_THERM_WSUB_CONTROL_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -4481,8 +4481,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_LOCAL_XSTOP_MASK(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_LOCAL_XSTOP_MASK(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -5786,8 +5785,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_PCB_OPCG_STOP(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_PCB_OPCG_STOP(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -5914,7 +5912,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_SCAN32(const fapi2::Target<K, M, V>& i_target, fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_SCAN32(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -5957,7 +5955,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_SCAN64(const fapi2::Target<K, M, V>& i_target, fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_SCAN64(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -6002,7 +6000,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_SCAN_CAPTUREDR_LONG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -6047,7 +6045,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_TRA0_TR0_CONFIG_5(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -6181,8 +6179,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_NET_CTRL1_RWX(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_NET_CTRL1_RWX(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -6225,8 +6222,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_NET_CTRL1_RWX_WAND(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_NET_CTRL1_RWX_WAND(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -6269,8 +6265,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_NET_CTRL1_RWX_WOR(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_NET_CTRL1_RWX_WOR(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));

@@ -1,7 +1,7 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: chips/p10/common/include/iohs/reg00032.H $                    */
+/* $Source: chips/p10/common/include/iohs/reg00000.H $                    */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
@@ -24,8 +24,8 @@
 /* IBM_PROLOG_END_TAG                                                     */
 #include "fapi2.H"
 
-#ifndef __IOHS_REG00032_H_
-#define __IOHS_REG00032_H_
+#ifndef __IOHS_REG00000_H_
+#define __IOHS_REG00000_H_
 
 namespace scomt
 {
@@ -64,7 +64,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_EPS_THERM_WSUB_INJECT_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -199,7 +199,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_TRA0_TR0_CONFIG_3(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -332,7 +332,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_XSTOP1(const fapi2::Target<K, M, V>& i_target, fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_XSTOP1(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));

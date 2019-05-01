@@ -1,7 +1,7 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: chips/p10/common/include/iohs/reg00035.H $                    */
+/* $Source: chips/p10/common/include/iohs/reg00003.H $                    */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
@@ -24,8 +24,8 @@
 /* IBM_PROLOG_END_TAG                                                     */
 #include "fapi2.H"
 
-#ifndef __IOHS_REG00035_H_
-#define __IOHS_REG00035_H_
+#ifndef __IOHS_REG00003_H_
+#define __IOHS_REG00003_H_
 
 namespace scomt
 {
@@ -62,7 +62,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_BIST(const fapi2::Target<K, M, V>& i_target, fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_BIST(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -1702,8 +1702,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_CLOCK_STAT_ARY(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_CLOCK_STAT_ARY(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -3007,8 +3006,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_CLOCK_STAT_SL(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_CLOCK_STAT_SL(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -4312,8 +4310,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_EPS_FIR_MODE_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_EPS_FIR_MODE_REG(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -5702,7 +5699,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_EPS_PSC_PSCOM_MODE_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -6393,8 +6390,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_AXON_OPCG_CAPT1(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_AXON_OPCG_CAPT1(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -7024,7 +7020,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_TRA0_TR0_TRACE_HI_DATA_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -7116,7 +7112,7 @@ fapi_try_exit:
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_AXON_TRA0_TR0_CONFIG_4(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+        const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -7250,8 +7246,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_LXSTOP_INTERRUPT_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_LXSTOP_INTERRUPT_REG(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -7295,8 +7290,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_MULTICAST_GROUP_1(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_MULTICAST_GROUP_1(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -7385,8 +7379,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_NET_CTRL0_RWX(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_NET_CTRL0_RWX(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -7429,8 +7422,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_NET_CTRL0_RWX_WAND(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_NET_CTRL0_RWX_WAND(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -7473,8 +7465,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_NET_CTRL0_RWX_WOR(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_NET_CTRL0_RWX_WOR(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
@@ -9954,8 +9945,7 @@ fapi_try_exit:
 }
 
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
-static inline fapi2::ReturnCode PUT_PLL_LOCK_REG(const fapi2::Target<K, M, V>& i_target,
-        fapi2::buffer<uint64_t>& i_data)
+static inline fapi2::ReturnCode PUT_PLL_LOCK_REG(const fapi2::Target<K, M, V>& i_target, const uint64_t i_data)
 {
 #ifdef SCOM_CHECKING
     FAPI_TRY(scomt::init(i_target));
