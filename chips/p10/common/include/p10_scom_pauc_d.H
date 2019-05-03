@@ -1,7 +1,7 @@
 /* IBM_PROLOG_BEGIN_TAG                                                   */
 /* This is an automatically generated prolog.                             */
 /*                                                                        */
-/* $Source: chips/p10/common/include/p10_scom_pec_d.H $                   */
+/* $Source: chips/p10/common/include/p10_scom_pauc_d.H $                  */
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
@@ -25,47 +25,63 @@
 
 #include "proc_scomt.H"
 
-#ifndef __p10_scom_pec_d_H_
-#define __p10_scom_pec_d_H_
+#ifndef __p10_scom_pauc_d_H_
+#define __p10_scom_pauc_d_H_
 
 
 namespace scomt
 {
-namespace pec
+namespace pauc
 {
 
 
-static const uint64_t CC_ATOMIC_LOCK_REG = 0x080303ffull;
+static const uint64_t CC_ATOMIC_LOCK_REG = 0x100303ffull;
 
 static const uint32_t CC_ATOMIC_LOCK_REG_LOCK_ENABLE = 0;
 static const uint32_t CC_ATOMIC_LOCK_REG_ID = 1;
 static const uint32_t CC_ATOMIC_LOCK_REG_ID_LEN = 4;
 static const uint32_t CC_ATOMIC_LOCK_REG_ACTIVITY = 8;
 static const uint32_t CC_ATOMIC_LOCK_REG_ACTIVITY_LEN = 8;
-// pec/reg00013.H
+// pauc/reg00013.H
 
-static const uint64_t CTRL_ATOMIC_LOCK_REG = 0x080003ffull;
+static const uint64_t CTRL_ATOMIC_LOCK_REG = 0x100003ffull;
 
 static const uint32_t CTRL_ATOMIC_LOCK_REG_LOCK_ENABLE = 0;
 static const uint32_t CTRL_ATOMIC_LOCK_REG_ID = 1;
 static const uint32_t CTRL_ATOMIC_LOCK_REG_ID_LEN = 4;
 static const uint32_t CTRL_ATOMIC_LOCK_REG_ACTIVITY = 8;
 static const uint32_t CTRL_ATOMIC_LOCK_REG_ACTIVITY_LEN = 8;
-// pec/reg00013.H
+// pauc/reg00013.H
 
-static const uint64_t EPS_DBG_DEBUG_TRACE_CONTROL = 0x080107d0ull;
-// pec/reg00013.H
+static const uint64_t EPS_DBG_DEBUG_TRACE_CONTROL = 0x100107d0ull;
+// pauc/reg00013.H
 
-static const uint64_t EPS_FIR_SUM_MASK_REG = 0x08040017ull;
+static const uint64_t EPS_FIR_SUM_MASK_REG = 0x10040017ull;
 
 static const uint32_t EPS_FIR_SUM_MASK_REG_XSTOP_TO_PCB = 0;
 static const uint32_t EPS_FIR_SUM_MASK_REG_RECOV_TO_PCB = 1;
 static const uint32_t EPS_FIR_SUM_MASK_REG_SPATTN_TO_PCB = 2;
 static const uint32_t EPS_FIR_SUM_MASK_REG_LOCAL_XSTOP_TO_PCB = 3;
 static const uint32_t EPS_FIR_SUM_MASK_REG_HOSTATTN_TO_PCB = 4;
-// pec/reg00013.H
+// pauc/reg00013.H
 
-static const uint64_t OPCG_CAPT1 = 0x08030010ull;
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t FIR_ACTION0_REG = 0x10000046ull;
+
+static const uint32_t FIR_ACTION0_REG_FIR_ACTION0 = 0;
+static const uint32_t FIR_ACTION0_REG_FIR_ACTION0_LEN = 26;
+// pauc/reg00013.H
+
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t FIR_ACTION1_REG = 0x10000047ull;
+
+static const uint32_t FIR_ACTION1_REG_FIR_ACTION1 = 0;
+static const uint32_t FIR_ACTION1_REG_FIR_ACTION1_LEN = 26;
+// pauc/reg00013.H
+
+static const uint64_t OPCG_CAPT1 = 0x10030010ull;
 
 static const uint32_t OPCG_CAPT1_COUNT = 0;
 static const uint32_t OPCG_CAPT1_COUNT_LEN = 4;
@@ -93,29 +109,104 @@ static const uint32_t OPCG_CAPT1_SEQ_11 = 54;
 static const uint32_t OPCG_CAPT1_SEQ_11_LEN = 5;
 static const uint32_t OPCG_CAPT1_SEQ_12 = 59;
 static const uint32_t OPCG_CAPT1_SEQ_12_LEN = 5;
-// pec/reg00013.H
+// pauc/reg00013.H
 
-static const uint64_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG = 0x03011801ull;
+static const uint64_t PB_PTL_FIR_REG_RWX = 0x10011800ull;
+static const uint64_t PB_PTL_FIR_REG_WOX_AND = 0x10011801ull;
+static const uint64_t PB_PTL_FIR_REG_WOX_OR = 0x10011802ull;
 
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_DROPPRIORITYMASK = 0;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_DROPPRIORITYMASK_LEN = 6;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_ENABLE_CTAG_DROP_PRIORITY = 6;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_ENABLE_IO_CMD_PACING = 7;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_DROPPACECOUNT = 8;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_DROPPACECOUNT_LEN = 9;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_DROPPACEINC = 17;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_DROPPACEINC_LEN = 6;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_RTYDROPDIVIDER = 23;
-static const uint32_t PB_PBCQ_PEPBREGS_DRPPRICTL_REG_RTYDROPDIVIDER_LEN = 3;
-// pec/reg00013.H
+static const uint32_t PB_PTL_FIR_REG_FMR00_TRAINED = 0;
+static const uint32_t PB_PTL_FIR_REG_FMR01_TRAINED = 1;
+static const uint32_t PB_PTL_FIR_REG_FMR02_TRAINED = 2;
+static const uint32_t PB_PTL_FIR_REG_FMR03_TRAINED = 3;
+static const uint32_t PB_PTL_FIR_REG_DOB01_UE = 8;
+static const uint32_t PB_PTL_FIR_REG_DOB01_CE = 9;
+static const uint32_t PB_PTL_FIR_REG_DOB01_SUE = 10;
+static const uint32_t PB_PTL_FIR_REG_DOB23_UE = 11;
+static const uint32_t PB_PTL_FIR_REG_DOB23_CE = 12;
+static const uint32_t PB_PTL_FIR_REG_DOB23_SUE = 13;
+static const uint32_t PB_PTL_FIR_REG_FRAMER00_ATTN = 20;
+static const uint32_t PB_PTL_FIR_REG_FRAMER01_ATTN = 21;
+static const uint32_t PB_PTL_FIR_REG_FRAMER02_ATTN = 22;
+static const uint32_t PB_PTL_FIR_REG_FRAMER03_ATTN = 23;
+static const uint32_t PB_PTL_FIR_REG_PARSER00_ATTN = 28;
+static const uint32_t PB_PTL_FIR_REG_PARSER01_ATTN = 29;
+static const uint32_t PB_PTL_FIR_REG_PARSER02_ATTN = 30;
+static const uint32_t PB_PTL_FIR_REG_PARSER03_ATTN = 31;
+static const uint32_t PB_PTL_FIR_REG_MB00_SPATTN = 36;
+static const uint32_t PB_PTL_FIR_REG_MB01_SPATTN = 37;
+static const uint32_t PB_PTL_FIR_REG_MB10_SPATTN = 38;
+static const uint32_t PB_PTL_FIR_REG_MB11_SPATTN = 39;
+static const uint32_t PB_PTL_FIR_REG_MB20_SPATTN = 40;
+static const uint32_t PB_PTL_FIR_REG_MB21_SPATTN = 41;
+static const uint32_t PB_PTL_FIR_REG_MB30_SPATTN = 42;
+static const uint32_t PB_PTL_FIR_REG_MB31_SPATTN = 43;
+static const uint32_t PB_PTL_FIR_REG_DOB01_ERR = 52;
+static const uint32_t PB_PTL_FIR_REG_DOB23_ERR = 53;
+static const uint32_t PB_PTL_FIR_REG_DIB01_ERR = 56;
+static const uint32_t PB_PTL_FIR_REG_DIB23_ERR = 57;
+// pauc/reg00013.H
 
-static const uint64_t PRIMARY_ADDRESS_REG = 0x080f0000ull;
-// pec/reg00013.H
+static const uint64_t PB_PTL_FIR_WOF_REG = 0x10011808ull;
 
-static const uint64_t SCAN_UPDATEDR_LONG = 0x0803b000ull;
-// pec/reg00013.H
+static const uint32_t PB_PTL_FIR_WOF_REG_PB_PTL_FIR_WOF = 0;
+static const uint32_t PB_PTL_FIR_WOF_REG_PB_PTL_FIR_WOF_LEN = 62;
+// pauc/reg00013.H
 
-static const uint64_t TRA0_TR0_CONFIG_9 = 0x08010409ull;
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t PPE_XIRAMRA = 0x10000011ull;
+
+static const uint32_t PPE_XIRAMRA_XCR = 1;
+static const uint32_t PPE_XIRAMRA_XCR_LEN = 3;
+static const uint32_t PPE_XIRAMRA_RAMRA_SPRG0 = 32;
+static const uint32_t PPE_XIRAMRA_RAMRA_SPRG0_LEN = 32;
+// pauc/reg00013.H
+
+static const uint64_t PRIMARY_ADDRESS_REG = 0x100f0000ull;
+// pauc/reg00013.H
+
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t REGS_TX_IMPCAL1_PB = 0x800f04001000003full;
+// pauc/reg00013.H
+
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t REGS_TX_IMPCAL_P_4X_PB = 0x800f2c001000003full;
+
+static const uint32_t REGS_TX_IMPCAL_P_4X_PB_TX_ZCAL_P_4X = 48;
+static const uint32_t REGS_TX_IMPCAL_P_4X_PB_TX_ZCAL_P_4X_LEN = 5;
+// pauc/reg00013.H
+
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t REGS_TX_IMPCAL_SWO5_PB = 0x800f54001000003full;
+
+static const uint32_t REGS_TX_IMPCAL_SWO5_PB_TX_ZCAL_SWO_IMP_CNTL_1R_1XN_32_39 = 48;
+static const uint32_t REGS_TX_IMPCAL_SWO5_PB_TX_ZCAL_SWO_IMP_CNTL_1R_1XN_32_39_LEN = 8;
+// pauc/reg00013.H
+
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t REGS_ZCAL_FIR_RESET_PB = 0x800f80001000003full;
+
+static const uint32_t REGS_ZCAL_FIR_RESET_PB_CLR_PAR_ERRS = 62;
+static const uint32_t REGS_ZCAL_FIR_RESET_PB_FIR_RESET = 63;
+// pauc/reg00013.H
+
+static const uint64_t SCAN_UPDATEDR_LONG = 0x1003b000ull;
+// pauc/reg00013.H
+
+//ERRCODE: // Some of the name targets not found in address targets: pauc
+
+static const uint64_t SCOM_PPE_WORK_REG2 = 0x10000022ull;
+
+static const uint32_t SCOM_PPE_WORK_REG2_SCOM_PPE_WORK2 = 0;
+static const uint32_t SCOM_PPE_WORK_REG2_SCOM_PPE_WORK2_LEN = 32;
+// pauc/reg00013.H
+
+static const uint64_t TRA0_TR0_CONFIG_9 = 0x10010409ull;
 
 static const uint32_t TRA0_TR0_CONFIG_9_DISABLE_COMPRESSION = 0;
 static const uint32_t TRA0_TR0_CONFIG_9_ERROR_BIT_COMPRESSION_CARE_MASK = 1;
@@ -144,15 +235,15 @@ static const uint32_t TRA0_TR0_CONFIG_9_ERROR_CMP_PATTERN = 33;
 static const uint32_t TRA0_TR0_CONFIG_9_TRIG0_ERR_CMP = 34;
 static const uint32_t TRA0_TR0_CONFIG_9_TRIG1_ERR_CMP = 35;
 static const uint32_t TRA0_TR0_CONFIG_9_DD1_STRETCH_TRIGGER_PULSES = 36;
-// pec/reg00013.H
+// pauc/reg00013.H
 
-static const uint64_t TRA0_TR1_CONFIG_0 = 0x08010443ull;
+static const uint64_t TRA0_TR1_CONFIG_0 = 0x10010443ull;
 
 static const uint32_t TRA0_TR1_CONFIG_0_CMP_MSK_LT_B_0_TO_63 = 0;
 static const uint32_t TRA0_TR1_CONFIG_0_CMP_MSK_LT_B_0_TO_63_LEN = 64;
-// pec/reg00013.H
+// pauc/reg00013.H
 
 }
 }
-#include "pec/reg00013.H"
+#include "pauc/reg00013.H"
 #endif
