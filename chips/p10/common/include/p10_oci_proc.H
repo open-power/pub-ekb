@@ -23,26 +23,28 @@
 /*                                                                        */
 /* IBM_PROLOG_END_TAG                                                     */
 
-#include "proc_scomt.H"
+#ifndef __PPE_HCODE__
+    #include "proc_scomt.H"
+#endif
 
 #ifndef __p10_oci_proc_H_
-#define __p10_oci_proc_H_
+    #define __p10_oci_proc_H_
 
-#include "p10_oci_proc_0.H"
-#include "p10_oci_proc_1.H"
-#include "p10_oci_proc_2.H"
-#include "p10_oci_proc_3.H"
-#include "p10_oci_proc_4.H"
-#include "p10_oci_proc_5.H"
-#include "p10_oci_proc_6.H"
-#include "p10_oci_proc_7.H"
-#include "p10_oci_proc_8.H"
-#include "p10_oci_proc_9.H"
-#include "p10_oci_proc_a.H"
-#include "p10_oci_proc_b.H"
-#include "p10_oci_proc_c.H"
-#include "p10_oci_proc_d.H"
-#include "p10_oci_proc_e.H"
-#include "p10_oci_proc_f.H"
+    #include "p10_oci_proc_0.H"
+    #include "p10_oci_proc_1.H"
+    #include "p10_oci_proc_2.H"
+    #include "p10_oci_proc_3.H"
+    #include "p10_oci_proc_4.H"
+    #include "p10_oci_proc_5.H"
+    #include "p10_oci_proc_6.H"
+    #include "p10_oci_proc_7.H"
+    #include "p10_oci_proc_8.H"
+    #include "p10_oci_proc_9.H"
+    #include "p10_oci_proc_a.H"
+    #include "p10_oci_proc_b.H"
+    #include "p10_oci_proc_c.H"
+    #include "p10_oci_proc_d.H"
+    #include "p10_oci_proc_e.H"
+    #include "p10_oci_proc_f.H"
 
 #endif
