@@ -1,7 +1,7 @@
 <!-- IBM_PROLOG_BEGIN_TAG                                                   -->
 <!-- This is an automatically generated prolog.                             -->
 <!--                                                                        -->
-<!-- $Source: chips/p10/procedures/xml/attribute_info/p10_qme_attributes.xml $ -->
+<!-- $Source: chips/p10/procedures/xml/error_info/p10_hcd_cache_repair_initf.xml $ -->
 <!--                                                                        -->
 <!-- OpenPOWER EKB Project                                                  -->
 <!--                                                                        -->
@@ -22,27 +22,40 @@
 <!-- permissions and limitations under the License.                         -->
 <!--                                                                        -->
 <!-- IBM_PROLOG_END_TAG                                                     -->
-<!-- p9_sbe_attributes.xml -->
-<!--    This file defines the subset of attributes from the larger pool of  -->
-<!--    defined attributes that will be included in the SBE platform.       -->
-<!--    Additionally, build time initial values can also be optionally      -->
-<!--    defined.                                                            -->
-<entries>
+<!-- Error definitions for p9_hcd_cache_startclocks procedures -->
+<hwpErrors>
   <!-- ********************************************************************* -->
-  <entry>
-           <name>ATTR_EC</name>
-           <!-- The value needs to be changed as per the EC level  -->
-           <value>0x10</value>
-  </entry>
-
-  <entry>
-           <name>ATTR_NAME</name>
-           <value>0xA</value>
-  </entry>
-
-  <entry>
-    <name>ATTR_CHIP_UNIT_POS</name>
-    <value>0x0</value>
-  </entry>
+  <hwpError>
+    <sbeError/>
+    <rc>RC_CACHE_REPAIR_FUNCTIONAL_TARGET_MISMATCH_PARTIAL_GOOD</rc>
+    <description>
+        functional targets mismatch partial good setting in CPLT_CTRL2.
+    </description>
+    <ffdc>CPLT_CTRL2</ffdc>
+    <ffdc>CORE_NUM</ffdc>
+    <ffdc>EQ_NUM</ffdc>
+    <callout>
+      <childTargets>
+        <parent>PROC_CHIP_IN_ERROR</parent>
+        <childType>TARGET_TYPE_CORE</childType>
+        <childNumber>CORE_NUMBER_IN_ERROR</childNumber>
+      </childTargets>
+      <priority>HIGH</priority>
+    </callout>
+    <deconfigure>
+      <childTargets>
+        <parent>PROC_CHIP_IN_ERROR</parent>
+        <childType>TARGET_TYPE_CORE</childType>
+        <childNumber>CORE_NUMBER_IN_ERROR</childNumber>
+      </childTargets>
+    </deconfigure>
+    <gard>
+      <childTargets>
+        <parent>PROC_CHIP_IN_ERROR</parent>
+        <childType>TARGET_TYPE_CORE</childType>
+        <childNumber>CORE_NUMBER_IN_ERROR</childNumber>
+      </childTargets>
+    </gard>
+  </hwpError>
   <!-- ********************************************************************* -->
-</entries>
+</hwpErrors>
