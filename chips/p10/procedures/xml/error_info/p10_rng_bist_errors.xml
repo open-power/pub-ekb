@@ -1,11 +1,11 @@
 <!-- IBM_PROLOG_BEGIN_TAG                                                   -->
 <!-- This is an automatically generated prolog.                             -->
 <!--                                                                        -->
-<!-- $Source: chips/p10/procedures/xml/attribute_info/p10_chip_ec_attributes.xml $ -->
+<!-- $Source: chips/p10/procedures/xml/error_info/p10_rng_bist_errors.xml $ -->
 <!--                                                                        -->
 <!-- OpenPOWER EKB Project                                                  -->
 <!--                                                                        -->
-<!-- COPYRIGHT 2019,2020                                                    -->
+<!-- COPYRIGHT 2016,2020                                                    -->
 <!-- [+] International Business Machines Corp.                              -->
 <!--                                                                        -->
 <!--                                                                        -->
@@ -22,7 +22,34 @@
 <!-- permissions and limitations under the License.                         -->
 <!--                                                                        -->
 <!-- IBM_PROLOG_END_TAG                                                     -->
-
-<attributes>
-
-</attributes>
+<!-- Halt codes for p10_rng_bist -->
+<hwpErrors>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_P10_NX_RNG_BIST_NEVER_FINISHED_ERR</rc>
+    <description>
+      Procedure: rng_bist
+      RNG BIST procedure timed out before receiving a bist_done status.
+    </description>
+    <ffdc>TARGET</ffdc>
+    <ffdc>RNG_BIT_FAIL_THRESHOLD</ffdc>
+    <ffdc>MAX_LOOPS</ffdc>
+    <ffdc>RNG_CFG</ffdc>
+    <!-- no callout, deconfig, gard tags as FW does not consume             -->
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_P10_NX_RNG_BIST_FAIL_STATUS_ERR</rc>
+    <description>
+      Procedure: rng_bist
+      RNG macro(s) failed RNG BIST checking.
+    </description>
+    <ffdc>TARGET</ffdc>
+    <ffdc>RNG_BIT_FAIL_THRESHOLD</ffdc>
+    <ffdc>RNG0_BIST_FAIL_STATUS</ffdc>
+    <ffdc>RNG1_BIST_FAIL_STATUS</ffdc>
+    <ffdc>RNG_CFG</ffdc>
+    <!-- no callout, deconfig, gard tags as FW does not consume             -->
+  </hwpError>
+  <!-- ******************************************************************** -->
+</hwpErrors>
