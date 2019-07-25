@@ -1,0 +1,70 @@
+<!-- IBM_PROLOG_BEGIN_TAG                                                   -->
+<!-- This is an automatically generated prolog.                             -->
+<!--                                                                        -->
+<!-- $Source: chips/p10/procedures/xml/error_info/p10_cpu_avg_frequency_read_errors.xml $ -->
+<!--                                                                        -->
+<!-- OpenPOWER EKB Project                                                  -->
+<!--                                                                        -->
+<!-- COPYRIGHT 2019,2020                                                    -->
+<!-- [+] International Business Machines Corp.                              -->
+<!--                                                                        -->
+<!--                                                                        -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");        -->
+<!-- you may not use this file except in compliance with the License.       -->
+<!-- You may obtain a copy of the License at                                -->
+<!--                                                                        -->
+<!--     http://www.apache.org/licenses/LICENSE-2.0                         -->
+<!--                                                                        -->
+<!-- Unless required by applicable law or agreed to in writing, software    -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,      -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
+<!-- implied. See the License for the specific language governing           -->
+<!-- permissions and limitations under the License.                         -->
+<!--                                                                        -->
+<!-- IBM_PROLOG_END_TAG                                                     -->
+
+
+<!-- *HWP HWP Owner: Greg Still <stillgs @us.ibm.com>                       -->
+    <!-- *HWP FW Owner: Sumit Kumar <sumit_kumar@in.ibm.com>                -->
+<!-- *HWP Team: PM                                                          -->
+<!-- *HWP Level: 2                                                          -->
+<!-- *HWP Consumed by: OCC:CME                                              -->
+
+<!-- Error definitions for p10_cpu_avg_frequency_read procedure -->
+<!-- ********************************************************************   -->
+<hwpErrors>
+
+  <hwpError>
+    <rc>RC_CPU_AVG_FREQ_INVALID_MODE_ERR</rc>
+    <description>
+      Invalid mode for cpu avg freq read.
+    </description>
+    <ffdc>TARGET</ffdc>
+    <ffdc>MODE</ffdc>
+    <callout>
+      <procedure>CODE</procedure>
+      <priority>HIGH</priority>
+    </callout>
+  </hwpError>
+
+  <hwpError>
+    <rc>RC_CPU_AVG_FREQ_SCOM_READ_ERR</rc>
+    <description>
+    Scom read error.
+    </description>
+    <ffdc>TARGET</ffdc>
+    <ffdc>REG_VALUE</ffdc>
+    <!-- No callout/deconfig/gard needed for this error -->
+  </hwpError>
+
+  <hwpError>
+    <rc>RC_CPU_AVG_FREQ_SAMPLE_VALID_ERR</rc>
+    <description>
+    Sample valid read error.
+    </description>
+    <ffdc>TARGET</ffdc>
+    <ffdc>REG_VALUE</ffdc>
+    <!-- No callout/deconfig/gard needed for this error -->
+  </hwpError>
+
+</hwpErrors>
