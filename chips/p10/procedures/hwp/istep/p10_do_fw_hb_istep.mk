@@ -24,3 +24,4 @@
 # IBM_PROLOG_END_TAG
 PROCEDURE=p10_do_fw_hb_istep
 $(call BUILD_PROCEDURE)
+$(call ADD_MODULE_INCDIR,$(PROCEDURE),$(ROOTPATH)/chips/p10/common/include)
