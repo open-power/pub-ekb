@@ -228,6 +228,20 @@
   </hwpError>
   <!-- ********************************************************************* -->
   <hwpError>
+    <rc>RC_XIPC_RINGID_CHECK_RINGID_ERROR</rc>
+    <description>ringid_check_ringId() failed</description>
+    <ffdc>CHIP_TARGET</ffdc>
+    <ffdc>LOCAL_RC</ffdc>
+    <ffdc>RING_ID</ffdc>
+    <ffdc>CHIP_ID</ffdc>
+    <ffdc>OCCURRENCE</ffdc>
+    <callout>
+      <procedure>CODE</procedure>
+      <priority>HIGH</priority>
+    </callout>
+  </hwpError>
+  <!-- ********************************************************************* -->
+  <hwpError>
     <rc>RC_XIPC_TOR_APPEND_RING_FAILED</rc>
     <description>tor_append_ring() failed</description>
     <ffdc>CHIP_TARGET</ffdc>
