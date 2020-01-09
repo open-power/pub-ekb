@@ -42,10 +42,17 @@ union IStep_Command_t
     uint32_t value;
     struct bytes
     {
+#ifdef _BIG_ENDIAN
         uint32_t key         : 8;
         uint32_t status      : 8;
         uint32_t istep_major : 8;
         uint32_t istep_minor : 8;
+#else
+        uint32_t istep_minor : 8;
+        uint32_t istep_major : 8;
+        uint32_t status      : 8;
+        uint32_t key         : 8;
+#endif
     } byte;
 
     IStep_Command_t() : value(0) {};
