@@ -46,7 +46,7 @@
 #include <fapi2.H>
 
 
-#include <p10_ppe_common.H>
+#include <p10_ppe_utils.H>
 #include <p10_hcd_common.H>
 #include <p10_sbe_localreg_dump.H>
 
@@ -55,11 +55,6 @@
 // ----------------------------------------------------------------------
 
 // these are probably in some include file
-
-
-
-const static uint64_t PPE_XIRAMDBG = 0x3;
-
 
 
 enum SBE_LREGS
@@ -87,6 +82,7 @@ enum SBE_LREGS
     SBE_DBG      = 0x0120 ,
     SBE_TBR      = 0x0140 ,
     SBE_IVPR     = 0x0160 ,
+    SBE_LFR      = 0x2040
 
 };
 
@@ -115,6 +111,7 @@ std::vector<SBEReg_t> v_sbe_local_regs =
     { SBE_DBG,       "SBE_DBG" },
     { SBE_TBR,       "SBE_TBR" },
     { SBE_IVPR,      "SBE_IVPR" },
+    { SBE_LFR ,      "SBE_LFR" },
 };
 
 
@@ -147,6 +144,7 @@ fapi2::ReturnCode p10_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
 
     uint16_t address = 0 ;
     uint32_t scom_address = 0 ;
+    uint64_t t_addr;
 
     FAPI_IMP("p10_sbe_trace");
     FAPI_INF("Executing p10_sbe_trace " );
@@ -158,15 +156,15 @@ fapi2::ReturnCode p10_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
 
     if (force_halt == 0)
     {
-        FAPI_TRY(pollHaltStateDone(i_target , sbe_base_address ));
+        FAPI_TRY(ppe_poll_halt_state(i_target , PPE_TYPE_SBE, 0));
     }
 
     else
 
     {
         FAPI_INF("p10_sbe_localreg_dump : Forcing halt thru SCOM");
-        FAPI_TRY(haltDone(i_target, sbe_base_address ));
-        FAPI_TRY(pollHaltStateDone(i_target, sbe_base_address ));
+        FAPI_TRY(ppe_halt(i_target,  PPE_TYPE_SBE, 0));
+        FAPI_TRY(ppe_poll_halt_state(i_target, PPE_TYPE_SBE, 0));
     }
 
 
@@ -175,7 +173,8 @@ fapi2::ReturnCode p10_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
 
 // If SBE is not in halt state
     FAPI_INF("p10_sbe_localreg_dump : reading XIRAMDBG after polling");
-    FAPI_TRY(getScom(i_target, sbe_base_address + PPE_XIRAMDBG, buf),
+    t_addr = ppe_get_xir_address(PPE_TYPE_SBE, PPE_IDX_XIRAMDBG, 0);
+    FAPI_TRY(getScom(i_target, t_addr, buf),
              "Error in GETSCOM");
 
     if (!buf.getBit<0>())
@@ -207,14 +206,14 @@ fapi2::ReturnCode p10_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
 
         //FAPI_INF("p10_sbe_localreg_dump : calling backup_gprs_sprs()...");
 
-        FAPI_TRY(backup_gprs_sprs(i_target , l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
+        FAPI_TRY(ppe_save_gprs_sprs(i_target , PPE_TYPE_SBE, 0, l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
         FAPI_INF("p10_sbe_localreg_dump : Entering the HALT state of SBE");
 
         for (auto it : v_sbe_local_regs)
         {
             // ******************************************************************
             address = it.number ; // defined in enums in p10_ppe_common.H files
-            FAPI_TRY(LocalRegRead(i_target , address , buf ));
+            FAPI_TRY(ppe_local_reg_read(i_target , PPE_TYPE_SBE, 0, address , buf ));
 
             //  FAPI_INF(" %-6s : Local_reg_addr :  0xC000_%04x :  0x%016lX \n",it.name.c_str() , it.number , buf);
             l_regVal.reg = it;
@@ -223,7 +222,7 @@ fapi2::ReturnCode p10_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
             // ******************************************************************
         }
 
-        FAPI_TRY(restore_gprs_sprs(i_target , l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
+        FAPI_TRY(ppe_restore_gprs_sprs(i_target , PPE_TYPE_SBE, 0, l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
         FAPI_INF("< p10_sbe_localreg_dump");
     }
 
