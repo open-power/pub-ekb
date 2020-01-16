@@ -182,7 +182,15 @@ fapi2::ReturnCode p10_do_fw_hb_istep(
                     "Received non-zero value from hostboot istep status reg: 0x%X",
                     hb_err);
 
-        if (key & READY_BIT)
+        // Check if the istep command has completed. By checking both the READY
+        // and the GO bit it is ensured that SPTask has executed the istep
+        // because once the step is completed the GO_BIT is unset.
+        //
+        // If only the READY_BIT is checked and there aren't sufficient delays
+        // prior to checking then we could mistakenly believe that the step was
+        // complete and return too soon thus allowing further commands to be
+        // written to the mbox before it is ready.
+        if ((key & READY_BIT) && !(key & GO_BIT))
         {
             // Command is complete
             break;
