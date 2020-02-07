@@ -85,8 +85,8 @@ std::map<uint64_t, std::string> const pibmsUnitMap
     {  0x1,    "OTPROM"        },
     {  0x5,    "FSI MAILBOX"   },
     {  0x8,    "PIBMEM"        },
-    {  0xA,    "I2C MASTER"    },
     {  0xB,    "SBE FIFO"      },
+    {  0xC,    "SPI MASTER"    },
     {  0xD,    "PSU"           },
     {  0xF,    "PCB MASTER"    },
 };
@@ -95,6 +95,7 @@ std::vector<sReg> const pibms_regs_2dump =
 {
     //addr,                            name,                              attribute
     {OTP_STATUS,                       "OTP_STATUS",                      ERR_ATTR },  //0x10002, error status
+    {OTP_CONTROL,                      "OTP_CONTROL",                     ERR_ATTR },  //0x10008, error status
 
     {MAILBOX_CBS_CTRL_STATUS,          "MAILBOX_CBS_CTRL_STATUS",          NO_ATTR },  //0x50001, default
     {MAILBOX_CBS_TRACE,                "MAILBOX_CBS_TRACE",                NO_ATTR },  //0x50002
@@ -121,6 +122,14 @@ std::vector<sReg> const pibms_regs_2dump =
     {MAILBOX_SCRATCH_REG_6,            "MAILBOX_SCRATCH_REG_6",            NO_ATTR },  //0x5003D
     {MAILBOX_SCRATCH_REG_7,            "MAILBOX_SCRATCH_REG_7",            NO_ATTR },  //0x5003E
     {MAILBOX_SCRATCH_REG_8,            "MAILBOX_SCRATCH_REG_8",            NO_ATTR },  //0x5003F
+    {MAILBOX_SCRATCH_REG_9,            "MAILBOX_SCRATCH_REG_9",            NO_ATTR },  //0x50180
+    {MAILBOX_SCRATCH_REG_10,           "MAILBOX_SCRATCH_REG_10",           NO_ATTR },  //0x50181
+    {MAILBOX_SCRATCH_REG_11,           "MAILBOX_SCRATCH_REG_11",           NO_ATTR },  //0x50182
+    {MAILBOX_SCRATCH_REG_12,           "MAILBOX_SCRATCH_REG_12",           NO_ATTR },  //0x50183
+    {MAILBOX_SCRATCH_REG_13,           "MAILBOX_SCRATCH_REG_13",           NO_ATTR },  //0x50184
+    {MAILBOX_SCRATCH_REG_14,           "MAILBOX_SCRATCH_REG_14",           NO_ATTR },  //0x50185
+    {MAILBOX_SCRATCH_REG_15,           "MAILBOX_SCRATCH_REG_15",           NO_ATTR },  //0x50186
+    {MAILBOX_SCRATCH_REG_16,           "MAILBOX_SCRATCH_REG_16",           NO_ATTR },  //0x50187
 
     {PIBMEM_CTRL,                      "PIBMEM_CTRL",                     SDB_ATTR },  //0x88000
     {PIBMEM_ADDR_PIB,                  "PIBMEM_ADDR_PIB",                 SDB_ATTR },  //0x88001
@@ -130,37 +139,61 @@ std::vector<sReg> const pibms_regs_2dump =
     {PIBMEM_FIR_MASK,                  "PIBMEM_FIR_MASK",                 SDB_ATTR },  //0x88008
     {PIBMEM_ECC_CAPTURE,               "PIBMEM_ECC_CAPTURE",              SDB_ATTR },  //0x8800B  (PIBMEM_REPR_0 in P9 ?)
 
-    {I2CM_CONTROL_REGISTER_B,                         "I2CM_CONTROL_REGISTER_B",                        NO_ATTR },   //0xA0000 EPP.PIB.I2CM.CONTROL_REGISTER_B
-    {I2CM_DATA8TO15_REGISTER_B,                       "I2CM_DATA8TO15_REGISTER_B",                      NO_ATTR },   //0xA0001 EPP.PIB.I2CM.DATA8TO15_REGISTER_B
-    {I2CM_FSTATUS_REGISTER_B,                         "I2CM_FSTATUS_REGISTER_B",                        NO_ATTR },   //0xA0002 EPP.PIB.I2CM.STATUS_REGISTER_B
-    {I2CM_DATA0TO7_REGISTER_B,                        "I2CM_DATA0TO7_REGISTER_B",                       NO_ATTR },   //0xA0003 EPP.PIB.I2CM.DATA0TO7_REGISTER_B
-    {I2CM_COMMAND_REGISTER_B,                         "I2CM_COMMAND_REGISTER_B",                        NO_ATTR },   //0xA0005 EPP.PIB.I2CM.COMMAND_REGISTER_B
-    {I2CM_MODE_REGISTER_B,                            "I2CM_MODE_REGISTER_B",                           NO_ATTR },   //0xA0006 EPP.PIB.I2CM.MODE_REGISTER_B
-    {I2CM_WATER_MARK_REGISTER_B,                      "I2CM_WATER_MARK_REGISTER_B",                     NO_ATTR },   //0xA0007 EPP.PIB.I2CM.WATER_MARK_REGISTER_B
-    {I2CM_INTERRUPT_MASK_REGISTER_READ_B,             "I2CM_INTERRUPT_MASK_REGISTER_READ_B",            NO_ATTR },   //0xA0008 EPP.PIB.I2CM.INTERRUPT_MASK_REGISTER_READ_B
-    {I2CM_INTERRUPT_COND_B,                           "I2CM_INTERRUPT_COND_B",                          NO_ATTR },   //0xA0009 EPP.PIB.I2CM.INTERRUPT_COND_B
-    {I2CM_INTERRUPTS_B,                               "I2CM_INTERRUPTS_B",                              NO_ATTR },   //0xA000A EPP.PIB.I2CM.INTERRUPTS_B
-    {I2CM_STATUS_REGISTER_ENGINE_B,                   "I2CM_STATUS_REGISTER_ENGINE_B",                 ERR_ATTR },   //0xA000B EPP.PIB.I2CM.STATUS_REGISTER_ENGINE_B
-    {I2CM_EXTENDED_STATUS_B,                          "I2CM_EXTENDED_STATUS_B",                         NO_ATTR },   //0xA000C EPP.PIB.I2CM.EXTENDED_STATUS_B
-    {I2CM_RESIDUAL_FRONT_END_BACK_END_LENGTH_B,       "I2CM_RESIDUAL_FRONT_END_BACK_END_LENGTH_B",      NO_ATTR },   //0xA000D EPP.PIB.I2CM.RESIDUAL_FRONT_END_BACK_END_LENGTH_B
-    {I2CM_I2C_BUSY_REGISTER_B,                        "I2CM_I2C_BUSY_REGISTER_B",                       NO_ATTR },   //0xA000E EPP.PIB.I2CM.I2C_BUSY_REGISTER_B
-    {I2CM_CONTROL_REGISTER_C,                         "I2CM_CONTROL_REGISTER_C",                        NO_ATTR },   //0xA1000 EPP.PIB.I2CM.CONTROL_REGISTER_C
-    {I2CM_DATA8TO15_REGISTER_C,                       "I2CM_DATA8TO15_REGISTER_C",                      NO_ATTR },   //0xA1001 EPP.PIB.I2CM.DATA8TO15_REGISTER_C
-    {I2CM_FSTATUS_REGISTER_C,                         "I2CM_FSTATUS_REGISTER_C",                        NO_ATTR },   //0xA1002 EPP.PIB.I2CM.STATUS_REGISTER_C
-    {I2CM_DATA0TO7_REGISTER_C,                        "I2CM_DATA0TO7_REGISTER_C",                       NO_ATTR },   //0xA1003 EPP.PIB.I2CM.DATA0TO7_REGISTER_C
-    {I2CM_COMMAND_REGISTER_C,                         "I2CM_COMMAND_REGISTER_C",                        NO_ATTR },   //0xA1005 EPP.PIB.I2CM.COMMAND_REGISTER_C
-    {I2CM_MODE_REGISTER_C,                            "I2CM_MODE_REGISTER_C",                           NO_ATTR },   //0xA1006 EPP.PIB.I2CM.MODE_REGISTER_C
-    {I2CM_WATER_MARK_REGISTER_C,                      "I2CM_WATER_MARK_REGISTER_C",                     NO_ATTR },   //0xA1007 EPP.PIB.I2CM.WATER_MARK_REGISTER_C
-    {I2CM_INTERRUPT_MASK_REGISTER_READ_C,             "I2CM_INTERRUPT_MASK_REGISTER_READ_C",            NO_ATTR },   //0xA1008 EPP.PIB.I2CM.INTERRUPT_MASK_REGISTER_READ_C
-    {I2CM_INTERRUPT_COND_C,                           "I2CM_INTERRUPT_COND_C",                          NO_ATTR },   //0xA1009 EPP.PIB.I2CM.INTERRUPT_COND_C
-    {I2CM_INTERRUPTS_C,                               "I2CM_INTERRUPTS_C",                              NO_ATTR },   //0xA100A EPP.PIB.I2CM.INTERRUPTS_C
-    {I2CM_STATUS_REGISTER_ENGINE_C,                   "I2CM_STATUS_REGISTER_ENGINE_C",                 ERR_ATTR },   //0xA100B EPP.PIB.I2CM.STATUS_REGISTER_ENGINE_C
-    {I2CM_EXTENDED_STATUS_C,                          "I2CM_EXTENDED_STATUS_C",                         NO_ATTR },   //0xA100C EPP.PIB.I2CM.EXTENDED_STATUS_C
-    {I2CM_RESIDUAL_FRONT_END_BACK_END_LENGTH_C,       "I2CM_RESIDUAL_FRONT_END_BACK_END_LENGTH_C",      NO_ATTR },   //0xA100D EPP.PIB.I2CM.RESIDUAL_FRONT_END_BACK_END_LENGTH_C
-    {I2CM_I2C_BUSY_REGISTER_C,                        "I2CM_I2C_BUSY_REGISTER_C",                       NO_ATTR },   //0xA100E EPP.PIB.I2CM.I2C_BUSY_REGISTER_C
+
+    {SPIMST0_ERR_INJECT,                  "SPIMST0_ERR_INJECT",         NO_ATTR},  //C0000
+    {SPIMST0_COUNTER,                     "SPIMST0_COUNTER",            NO_ATTR},  //C0001
+    {SPIMST0_CONFIG,                      "SPIMST0_CONFIG",             NO_ATTR},  //C0002
+    {SPIMST0_CLOCK_CONFIG,                "SPIMST0_CLOCK_CONFIG",       NO_ATTR},  //C0003
+    {SPIMST0_MEM_MAPPING,                 "SPIMST0_MEM_MAPPING",        NO_ATTR},  //C0004
+    {SPIMST0_TRANSMIT_DATA_REG,           "SPIMST0_TRANSMIT_DATA_REG",  NO_ATTR},  //C0005
+    {SPIMST0_RECEIVE_DATA_REG,            "SPIMST0_RECEIVE_DATA_REG",   NO_ATTR},  //C0006
+    {SPIMST0_SEQ_OP_REG,                  "SPIMST0_SEQ_OP_REG",         NO_ATTR},  //C0007
+    {SPIMST0_STATUS_REG,                  "SPIMST0_STATUS_REG",         NO_ATTR},  //C0008
+
+    {SPIMST1_ERR_INJECT,                  "SPIMST1_ERR_INJECT",         NO_ATTR},   //C0020
+    {SPIMST1_COUNTER,                     "SPIMST1_COUNTER",            NO_ATTR},   //C0021
+    {SPIMST1_CONFIG,                      "SPIMST1_CONFIG",             NO_ATTR},   //C0022
+    {SPIMST1_CLOCK_CONFIG,                "SPIMST1_CLOCK_CONFIG",       NO_ATTR},   //C0023
+    {SPIMST1_MEM_MAPPING,                 "SPIMST1_MEM_MAPPING",        NO_ATTR},   //C0024
+    {SPIMST1_TRANSMIT_DATA_REG,           "SPIMST1_TRANSMIT_DATA_REG",  NO_ATTR},   //C0025
+    {SPIMST1_RECEIVE_DATA_REG,            "SPIMST1_RECEIVE_DATA_REG",   NO_ATTR},   //C0026
+    {SPIMST1_SEQ_OP_REG,                  "SPIMST1_SEQ_OP_REG",         NO_ATTR},   //C0027
+    {SPIMST1_STATUS_REG,                  "SPIMST1_STATUS_REG",         NO_ATTR},   //C0028
+
+    {SPIMST2_ERR_INJECT,                  "SPIMST2_ERR_INJECT",         NO_ATTR},   //C0040
+    {SPIMST2_COUNTER,                     "SPIMST2_COUNTER",            NO_ATTR},   //C0041
+    {SPIMST2_CONFIG,                      "SPIMST2_CONFIG",             NO_ATTR},   //C0042
+    {SPIMST2_CLOCK_CONFIG,                "SPIMST2_CLOCK_CONFIG",       NO_ATTR},   //C0043
+    {SPIMST2_MEM_MAPPING,                 "SPIMST2_MEM_MAPPING",        NO_ATTR},   //C0044
+    {SPIMST2_TRANSMIT_DATA_REG,           "SPIMST2_TRANSMIT_DATA_REG",  NO_ATTR},   //C0045
+    {SPIMST2_RECEIVE_DATA_REG,            "SPIMST2_RECEIVE_DATA_REG",   NO_ATTR},   //C0046
+    {SPIMST2_SEQ_OP_REG,                  "SPIMST2_SEQ_OP_REG",         NO_ATTR},   //C0047
+    {SPIMST2_STATUS_REG,                  "SPIMST2_STATUS_REG",         NO_ATTR},   //C0048
+
+    {SPIMST3_ERR_INJECT,                  "SPIMST3_ERR_INJECT",         NO_ATTR},   //C0060
+    {SPIMST3_COUNTER,                     "SPIMST3_COUNTER",            NO_ATTR},   //C0061
+    {SPIMST3_CONFIG,                      "SPIMST3_CONFIG",             NO_ATTR},   //C0062
+    {SPIMST3_CLOCK_CONFIG,                "SPIMST3_CLOCK_CONFIG",       NO_ATTR},   //C0063
+    {SPIMST3_MEM_MAPPING,                 "SPIMST3_MEM_MAPPING",        NO_ATTR},   //C0064
+    {SPIMST3_TRANSMIT_DATA_REG,           "SPIMST3_TRANSMIT_DATA_REG",  NO_ATTR},   //C0065
+    {SPIMST3_RECEIVE_DATA_REG,            "SPIMST3_RECEIVE_DATA_REG",   NO_ATTR},   //C0066
+    {SPIMST3_SEQ_OP_REG,                  "SPIMST3_SEQ_OP_REG",         NO_ATTR},   //C0067
+    {SPIMST3_STATUS_REG,                  "SPIMST3_STATUS_REG",         NO_ATTR},   //C0068
+
+    {SPIMST4_ERR_INJECT,                  "SPIMST4_ERR_INJECT",         NO_ATTR},   //C0080
+    {SPIMST4_COUNTER,                     "SPIMST4_COUNTER",            NO_ATTR},   //C0081
+    {SPIMST4_CONFIG,                      "SPIMST4_CONFIG",             NO_ATTR},   //C0082
+    {SPIMST4_CLOCK_CONFIG,                "SPIMST4_CLOCK_CONFIG",       NO_ATTR},   //C0083
+    {SPIMST4_MEM_MAPPING,                 "SPIMST4_MEM_MAPPING",        NO_ATTR},   //C0084
+    {SPIMST4_TRANSMIT_DATA_REG,           "SPIMST4_TRANSMIT_DATA_REG",  NO_ATTR},   //C0085
+    {SPIMST4_RECEIVE_DATA_REG,            "SPIMST4_RECEIVE_DATA_REG",   NO_ATTR},   //C0086
+    {SPIMST4_SEQ_OP_REG,                  "SPIMST4_SEQ_OP_REG",         NO_ATTR},   //C0087
+    {SPIMST4_STATUS_REG,                  "SPIMST4_STATUS_REG",         NO_ATTR},   //C0088
 
     {SBEFIFO_UPSTREAM_STATUS,          "SBEFIFO_UPSTREAM_STATUS",           ERR_ATTR },  //0xB0001 EPF.FSI.W.FSI_SBE_FIFO.FSB_UPFIFO_STATUS
     {SBEFIFO_DOWNSTREAM_STATUS,        "SBEFIFO_DOWNSTREAM_STATUS",         ERR_ATTR },  //0xB0011 EPF.FSI.W.FSI_SBE_FIFO.FSB_DOWNFIFO_STATUS
+    {SBEFIFO2_UPSTREAM_STATUS,         "SBEFIFO2_UPSTREAM_STATUS",           ERR_ATTR },  //0xB0021 EPF.FSI.W.FSI_SBE_FIFO2.FSB_UPFIFO_STATUS
+    {SBEFIFO2_DOWNSTREAM_STATUS,       "SBEFIFO2_DOWNSTREAM_STATUS",         ERR_ATTR },  //0xB0031 EPF.FSI.W.FSI_SBE_FIFO2.FSB_DOWNFIFO_STATUS
 
     {PSU_PIBHST_CTRL_STATUS,           "PSU_PIBHST_CTRL_STATUS",            SDB_ATTR },  //0xD0000
     {PSU_PIBHST_FILTER,                "PSU_PIBHST_FILTER",                 SDB_ATTR },  //0xD0001
@@ -197,6 +230,15 @@ std::map<uint64_t, std::vector<sRegBit>> const pibmsRegs
             { BIT05,  "STATUS_UNCORR_ERROR: ECC Uncorrectable error",           "" },
             { BIT45,  "STATUS_DCOMP_ERR: Decompression Engine Error",           "" },
             { BIT46,  "STATUS_INVLD_PRGM_ERR: Invalid Program Operation error", "" }
+        }
+    },
+    //0x10008 - OTP_CONTROL
+    {
+        OTP_CONTROL,
+        {
+            { BIT00,  "MODE_DCOMP_ENABLE: Decompression Engine enabled", "" },
+            { BIT01,  "MODE_ECC_ENABLE: ECC checking enabled",  "" },
+            { BIT03,  "MODE_ECC_CHK_DISABLE: ECC check disabled",    "" }
         }
     },
     {
@@ -251,19 +293,186 @@ std::map<uint64_t, std::vector<sRegBit>> const pibmsRegs
         }
     },
     {
-        //0xA000B
-        I2CM_STATUS_REGISTER_ENGINE_B,
+        //0xC0003
+        SPIMST0_CLOCK_CONFIG,  // bit 0-11, bit 31, bit 32-35
         {
-            { BIT00,  "INVALID_CMD_0: new command given when old command is not yet completed",  "" },
-            { BIT01,  "LBUS_PARITY_ERROR_0: local bus parity error",  "" },
-            { BIT02,  "BE_OV_ERROR_0: back end overrun error : Writing/reading into full/empty fifo resply",  "" },
-            { BIT03,  "BE_ACC_ERROR_0: back end access error : Writing/Reading more data than requested",  "" },
-            { BIT04,  "ARBITRATION_LOST_ERROR_0: arbitration lost error",  "" },
-            { BIT05,  "NACK_RECEIVED_ERROR_0: nack receieved error",  "" },
-            { BIT08,  "STOP_ERROR_0: Not able to send the stop condition on the BUS",  "" },
-            { BIT40,  "LBUS_PARITY_ERR1_0: local bus parity error from the local bus to glue logic",  "" }
+            { 0x1000C, "SPI master0 clock divider", "" },
+            { BIT31, "mmSPIsm enabled", "" },
+            { 0x12004, "Hardware reset signal for spi slave", "" }
         }
     },
+    {
+        //0xC0023
+        SPIMST1_CLOCK_CONFIG, // bit 0-11, bit 31, bit 32-35
+        {
+            { 0x1000C, "SPI master1 clock divider", "" },
+            { BIT31, "mmSPIsm enabled", "" },
+            { 0x12004, "Hardware reset signal for spi slave", "" }
+        }
+    },
+    {
+        //0xC0043
+        SPIMST2_CLOCK_CONFIG, // bit 0-11, bit 31, bit 32-35
+        {
+            { 0x1000C, "SPI master2 clock divider", "" },
+            { BIT31, "mmSPIsm enabled", "" },
+            { 0x12004, "Hardware reset signal for spi slave", "" }
+        }
+    },
+    {
+        //0xC0063
+        SPIMST3_CLOCK_CONFIG, // bit 0-11, bit 31, bit 32-35
+        {
+            { 0x1000C, "SPI master3 clock divider", "" },
+            { BIT31, "mmSPIsm enabled", "" },
+            { 0x12004, "Hardware reset signal for spi slave", "" }
+        }
+    },
+    {
+        //0xC0083
+        SPIMST4_CLOCK_CONFIG, // bit 0-11, bit 31, bit 32-35
+        {
+            { 0x1000C, "SPI master4 clock divider", "" },
+            { BIT31, "mmSPIsm enabled", "" },
+            { 0x12004, "Hardware reset signal for spi slave", "" }
+        }
+    },
+    {
+        //0xC0008
+        SPIMST0_STATUS_REG,
+        {
+            { BIT00, "Receive data register full", "" },
+            { BIT01, "Receive data register overrun", "" },
+            { BIT02, "Receive data register underrun", "" },
+            { BIT04, "Transmit data register full", "" },
+            { BIT05, "Transmit data register overrun", "" },
+            { BIT06, "Transmit data register underrun", "" },
+            { BIT32, "Counter configuration register parity error", "" },
+            { BIT33, "Clock configuration register parity error", "" },
+            { BIT34, "Sequencer configuration register parity error", "" },
+            { BIT35, "Sequencer fsm error", "" },
+            { BIT36, "Shifter fsm error", "" },
+            { BIT37, "Pattern match register parity error", "" },
+            { BIT38, "Transmit data register parity error", "" },
+            { BIT39, "Receive data register parity error", "" },
+            { BIT40, "Configuration register 1 parity error", "" },
+            { BIT42, "Error register parity error", "" },
+            { BIT43, "Ecc correctable error", "" },
+            { BIT44, "Ecc uncorrectable error", "" },
+            { BIT47, "Memory mapped SPI address overlap", "" },
+            { BIT50, "Port multiplexer error", "" },
+            { BIT51, "Address range error", "" }
+        }
+    },
+    {
+        //0xC0028
+        SPIMST1_STATUS_REG,
+        {
+            { BIT00, "Receive data register full", "" },
+            { BIT01, "Receive data register overrun", "" },
+            { BIT02, "Receive data register underrun", "" },
+            { BIT04, "Transmit data register full", "" },
+            { BIT05, "Transmit data register overrun", "" },
+            { BIT06, "Transmit data register underrun", "" },
+            { BIT32, "Counter configuration register parity error", "" },
+            { BIT33, "Clock configuration register parity error", "" },
+            { BIT34, "Sequencer configuration register parity error", "" },
+            { BIT35, "Sequencer fsm error", "" },
+            { BIT36, "Shifter fsm error", "" },
+            { BIT37, "Pattern match register parity error", "" },
+            { BIT38, "Transmit data register parity error", "" },
+            { BIT39, "Receive data register parity error", "" },
+            { BIT40, "Configuration register 1 parity error", "" },
+            { BIT42, "Error register parity error", "" },
+            { BIT43, "Ecc correctable error", "" },
+            { BIT44, "Ecc uncorrectable error", "" },
+            { BIT47, "Memory mapped SPI address overlap", "" },
+            { BIT50, "Port multiplexer error", "" },
+            { BIT51, "Address range error", "" }
+        }
+    },
+    {
+        //0xC0048
+        SPIMST2_STATUS_REG,
+        {
+            { BIT00, "Receive data register full", "" },
+            { BIT01, "Receive data register overrun", "" },
+            { BIT02, "Receive data register underrun", "" },
+            { BIT04, "Transmit data register full", "" },
+            { BIT05, "Transmit data register overrun", "" },
+            { BIT06, "Transmit data register underrun", "" },
+            { BIT32, "Counter configuration register parity error", "" },
+            { BIT33, "Clock configuration register parity error", "" },
+            { BIT34, "Sequencer configuration register parity error", "" },
+            { BIT35, "Sequencer fsm error", "" },
+            { BIT36, "Shifter fsm error", "" },
+            { BIT37, "Pattern match register parity error", "" },
+            { BIT38, "Transmit data register parity error", "" },
+            { BIT39, "Receive data register parity error", "" },
+            { BIT40, "Configuration register 1 parity error", "" },
+            { BIT42, "Error register parity error", "" },
+            { BIT43, "Ecc correctable error", "" },
+            { BIT44, "Ecc uncorrectable error", "" },
+            { BIT47, "Memory mapped SPI address overlap", "" },
+            { BIT50, "Port multiplexer error", "" },
+            { BIT51, "Address range error", "" }
+        }
+    },
+    {
+        //0xC0068
+        SPIMST3_STATUS_REG,
+        {
+            { BIT00, "Receive data register full", "" },
+            { BIT01, "Receive data register overrun", "" },
+            { BIT02, "Receive data register underrun", "" },
+            { BIT04, "Transmit data register full", "" },
+            { BIT05, "Transmit data register overrun", "" },
+            { BIT06, "Transmit data register underrun", "" },
+            { BIT32, "Counter configuration register parity error", "" },
+            { BIT33, "Clock configuration register parity error", "" },
+            { BIT34, "Sequencer configuration register parity error", "" },
+            { BIT35, "Sequencer fsm error", "" },
+            { BIT36, "Shifter fsm error", "" },
+            { BIT37, "Pattern match register parity error", "" },
+            { BIT38, "Transmit data register parity error", "" },
+            { BIT39, "Receive data register parity error", "" },
+            { BIT40, "Configuration register 1 parity error", "" },
+            { BIT42, "Error register parity error", "" },
+            { BIT43, "Ecc correctable error", "" },
+            { BIT44, "Ecc uncorrectable error", "" },
+            { BIT47, "Memory mapped SPI address overlap", "" },
+            { BIT50, "Port multiplexer error", "" },
+            { BIT51, "Address range error", "" }
+        }
+    },
+    {
+        //0xC0088
+        SPIMST4_STATUS_REG,
+        {
+            { BIT00, "Receive data register full", "" },
+            { BIT01, "Receive data register overrun", "" },
+            { BIT02, "Receive data register underrun", "" },
+            { BIT04, "Transmit data register full", "" },
+            { BIT05, "Transmit data register overrun", "" },
+            { BIT06, "Transmit data register underrun", "" },
+            { BIT32, "Counter configuration register parity error", "" },
+            { BIT33, "Clock configuration register parity error", "" },
+            { BIT34, "Sequencer configuration register parity error", "" },
+            { BIT35, "Sequencer fsm error", "" },
+            { BIT36, "Shifter fsm error", "" },
+            { BIT37, "Pattern match register parity error", "" },
+            { BIT38, "Transmit data register parity error", "" },
+            { BIT39, "Receive data register parity error", "" },
+            { BIT40, "Configuration register 1 parity error", "" },
+            { BIT42, "Error register parity error", "" },
+            { BIT43, "Ecc correctable error", "" },
+            { BIT44, "Ecc uncorrectable error", "" },
+            { BIT47, "Memory mapped SPI address overlap", "" },
+            { BIT50, "Port multiplexer error", "" },
+            { BIT51, "Address range error", "" }
+        }
+    },
+
     {
         //0xB0001 - EPF.FSI.W.FSI_SBE_FIFO.FSB_UPFIFO_STATUS
         SBEFIFO_UPSTREAM_STATUS,
@@ -284,6 +493,28 @@ std::map<uint64_t, std::vector<sRegBit>> const pibmsRegs
             { BIT08,  "DNFIFO_STATUS_DEQUEUED_EOT_FLAG: A fifo entry has been dequeued with set EOT flag",  "" },
             { BIT10,  "DNFIFO_STATUS_FIFO_FULL: Downstream FIFO is full",  "" },
             { BIT11,  "DNFIFO_STATUS_FIFO_EMPTY: Downstream FIFO is empty",  "" }
+        }
+    },
+    {
+        //0xB0021 - EPF.FSI.W.FSI_SBE_FIFO2.FSB_UPFIFO_STATUS
+        SBEFIFO2_UPSTREAM_STATUS,
+        {
+            { BIT06,  "HUPFIFO_STATUS_REQ_RESET_FR_SP: Host is requesting a FIFO reset",  "" },
+            { BIT07,  "HUPFIFO_STATUS_REQ_RESET_FR_SBE: SBE is requesting a FIFO reset through downstream path",  "" },
+            { BIT08,  "HUPFIFO_STATUS_DEQUEUED_EOT_FLAG: A fifo entry has been dequeued with set EOT flag",  "" },
+            { BIT10,  "HUPFIFO_STATUS_FIFO_FULL: Host Upstream FIFO is full",  "" },
+            { BIT11,  "HUPFIFO_STATUS_FIFO_EMPTY: Host Upstream FIFO is empty",  "" }
+        }
+    },
+    {
+        //0xB0031 - EPF.FSI.W.FSI_SBE_FIFO2.FSB_DOWNFIFO_STATUS
+        SBEFIFO2_DOWNSTREAM_STATUS,
+        {
+            { BIT06,  "HDNFIFO_STATUS_REQ_RESET_FR_SBE: SBE is requesting a FIFO reset",  "" },
+            { BIT07,  "HDNFIFO_STATUS_REQ_RESET_FR_SP: Host is requesting a FIFO reset through upstream path",  "" },
+            { BIT08,  "HDNFIFO_STATUS_DEQUEUED_EOT_FLAG: A fifo entry has been dequeued with set EOT flag",  "" },
+            { BIT10,  "HDNFIFO_STATUS_FIFO_FULL: Host Downstream FIFO is full",  "" },
+            { BIT11,  "HDNFIFO_STATUS_FIFO_EMPTY: Host Downstream FIFO is empty",  "" }
         }
     },
     {
