@@ -30,6 +30,9 @@
 /// *HWP HW Maintainer: Thi Tran <thi@us.ibm.com>
 /// *HWP FW Maintainer: Matt Raybuck <matthew.raybuck@ibm.com>
 /// *HWP Consumed by: 3rd Parties such as OpenBMC, Cronus, FSP, etc.
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
+
 #include "p10_do_fw_hb_istep.H"
 #include "p10_scom_proc.H"
 
@@ -132,7 +135,7 @@ fapi2::ReturnCode p10_do_fw_hb_istep(
                 fapi2::DO_FW_HB_ISTEP_NOT_READY()
                 .set_TARGET(i_target)
                 .set_KEY(key),
-                "Ready bit for istep mode wasn't set in %llu ms",
+                "Ready bit for istep mode wasn't set in %" PRIu64 " ms",
                 i_retry_limit_ms);
 
     // Set the go bit for the key.
@@ -212,7 +215,7 @@ fapi2::ReturnCode p10_do_fw_hb_istep(
                 .set_MAX_RETRY_TIME_MS(i_retry_limit_ms)
                 .set_DELAY_MS(i_delay_ms)
                 .set_SIM_CYCLES_DELAY_MS(i_delay_simCycles),
-                "Requested istep %d.%d failed to complete in %llu ms",
+                "Requested istep %d.%d failed to complete in %" PRIu64 " ms",
                 i_istepMajor,
                 i_istepMinor,
                 i_retry_limit_ms);
