@@ -35,7 +35,11 @@
 #include <fapi2.H>
 #include <pibms_regs2dump.H>
 #include <p10_pibms_reg_dump.H>
-
+#include "p10_scom_perv_2.H"
+#include "p10_scom_perv_7.H"
+#include "p10_scom_proc_0.H"
+#include "p10_scom_proc_4.H"
+#include <string>
 
 // -----------------------------------------------------------------------------
 //  Function definitions
@@ -51,10 +55,15 @@
 fapi2::ReturnCode p10_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_PROC_CHIP>& i_target,
                                       std::vector<sRegV>& regv_set)
 {
+    using namespace scomt;
+
     fapi2::buffer<uint32_t> l_data32_cbs_cs;
     fapi2::buffer<uint32_t> l_data32_sb_cs;
+    fapi2::buffer<uint32_t> l_data32;
+    fapi2::buffer<uint64_t> l_data64_sl_clk_status;
     uint64_t addr;
-    bool sdb;
+    bool sdb, pib_clks_not_running, net_clks_not_running;
+    std::string reg_name;
 
     FAPI_INF("Executing p10_pibms_reg_dump");
 
@@ -62,6 +71,15 @@ fapi2::ReturnCode p10_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_PRO
 
     FAPI_TRY(fapi2::getCfamRegister(i_target, PERV_CBS_CS_FSI, l_data32_cbs_cs));  //0x2801
     FAPI_TRY(fapi2::getCfamRegister(i_target, PERV_SB_CS_FSI, l_data32_sb_cs));    //0x2808
+
+    FAPI_DBG("Release PCB reset");
+    l_data32.flush<0>().setBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_PCB_RESET_DC>();
+    FAPI_TRY(putCfamRegister(i_target, perv::FSXCOMP_FSXLOG_ROOT_CTRL0_CLEAR_FSI, l_data32 ));
+
+    FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CLOCK_STAT_SL, l_data64_sl_clk_status));
+
+    pib_clks_not_running = l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT2_SL>();
+    net_clks_not_running = l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT4_SL>();
 
     // only dump registers can be accessed in secure debug mode
     // PERV_CBS_CS_SECURE_ACCESS_BIT = 4,  PERV_SB_CS_SECURE_DEBUG_MODE = 0
@@ -79,10 +97,17 @@ fapi2::ReturnCode p10_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_PRO
             if (!sdb || ((itr->reg).attr & SDB_ATTR))    //only read registers can be accessed in secure debug mode
             {
                 addr = (itr->reg).addr;
-                FAPI_TRY((getScom(i_target , addr , buf)));
-                itr->value = buf;
-                //mark value is valid
-                (itr->reg).attr |= VLD_ATTR;
+                reg_name = (itr->reg).name;
+
+                if( ! (pib_clks_not_running && ((reg_name.find("PIBMEM") != std::string::npos)
+                                                || (reg_name.find("PSU") != std::string::npos))) &&
+                    ! (net_clks_not_running && (reg_name.find("PCBM") != std::string::npos)))
+                {
+                    FAPI_TRY((getScom(i_target , addr , buf)));
+                    itr->value = buf;
+                    //mark value is valid
+                    (itr->reg).attr |= VLD_ATTR;
+                }
             }
         }
     }

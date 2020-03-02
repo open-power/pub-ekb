@@ -211,6 +211,10 @@ std::vector<sReg> const pibms_regs_2dump =
     {PCBM_REC_ERR_REG3,                "PCBM_REC_ERR_REG3",                  NO_ATTR },  //0xF0014  EPP.PIB.PCBMS.REC_ERR_REG3
     {PCBM_FIRST_ERR,                   "PCBM_FIRST_ERR",                     NO_ATTR },  //0xF001E  EPP.PIB.PCBMS.FIRST_ERR_REG
     {PCBM_ERR_REG,                     "PCBM_ERR_REG",                       NO_ATTR },  //0xF001F  EPP.PIB.PCBMS.ERROR_REG
+    {PCBM_REC_ERR_MST14_REG0,          "PCBM_REC_ERR_MST14_REG0",            NO_ATTR },  //0xF0078  EPP.PIB.PCBMS.REC_ERR_MST14_REG0
+    {PCBM_REC_ERR_MST14_REG1,          "PCBM_REC_ERR_MST14_REG1",            NO_ATTR },  //0xF0079  EPP.PIB.PCBMS.REC_ERR_MST14_REG1
+    {PCBM_REC_ERR_MST14_REG2,          "PCBM_REC_ERR_MST14_REG2",            NO_ATTR },  //0xF007A  EPP.PIB.PCBMS.REC_ERR_MST14_REG2
+    {PCBM_REC_ERR_MST14_REG3,          "PCBM_REC_ERR_MST14_REG3",            NO_ATTR },  //0xF007B  EPP.PIB.PCBMS.REC_ERR_MST14_REG3
 };
 
 
@@ -242,54 +246,82 @@ std::map<uint64_t, std::vector<sRegBit>> const pibmsRegs
         }
     },
     {
-        MAILBOX_SCRATCH_REG_1,  //print bit0-7 and bit8-31
+        MAILBOX_SCRATCH_REG_1,  //print bits0-31
         {
-            { 0x10008,  "EQ Gard records",  "" },
-            { 0x10818,  "EC Gard records",  "" }
+            { 0x1001F,  "Core Gard records",  "" }
         }
     },
     {
-        MAILBOX_SCRATCH_REG_2,  //print bit0-15 and bit16-19
+        MAILBOX_SCRATCH_REG_2,  //print  bits0-1, bits4-7, bits8-11, bits12-19, bits20-27
         {
-            { 0x10010,  "Ref clock I2C bus divider",  "" },
-            { 0x11004,  "Meshctrl setup",             "" }
+            { 0x10002,  "PCI functional mask",           "" },
+            { BIT02,     "Nest MMU functional mask",     "" },
+            { 0x10404,  "MC functional mask",            "" },
+            { 0x10804,  "Physical PAU functional mask",  "" },
+            { 0x10C08,  "Logical PAU functional mask",   "" },
+            { 0x11408,  "IOHS functional mask",          "" }
         }
     },
     {
         MAILBOX_SCRATCH_REG_3,
         {
-            { BIT00,  "Used by SBE, HB - FW ISTEP_MODE",  "" },
+            { BIT00,  "Used by SBE, HB - FW ISTEP_MODE",                 "" },
             { BIT01,  "SBE should go directly to runtime functionality", "" },
             { BIT02,  "The SBE to indicate an MPIPL to Hostboot",        "" },
-            { BIT03,  "To indicate that FSP is attached",   "To indicate FSPless" }
+            { BIT03,  "To indicate that FSP is attached",   "To indicate FSPless" },
+            { BIT06,  "Security disabled",         "" },
+            { BIT07,  "Allow attribute overrides", "" }
         }
     },
     {
-        MAILBOX_SCRATCH_REG_4,
+        MAILBOX_SCRATCH_REG_4, // print bits0-11, bits12-15, bits16-31
         {
-            { BIT16,  "Force CP filter PLL into bypass",  "" },
-            { BIT17,  "Force SS filter PLL into bypass",  "" },
-            { BIT18,  "Force IO filter PLL into bypass",  "" },
-            { BIT19,  "Force DPLL into bypass",           "" },
-            { BIT20,  "Force nest PLL into bypass",       "" },
-            { BIT21,  "Holds OBUS ratio value - Half speed",  "Holds OBUS ratio value - Normal speed" }
+            { 0x1000C,  "Ref clock SPI bus divider",  "" },
+            { 0x10C04,  "Round trip delay",  "" },
+            { 0x11010,  "Core boot frequency",  "" }
         }
     },
     {
-        MAILBOX_SCRATCH_REG_5,
+        MAILBOX_SCRATCH_REG_5, // print bits0-1, bits4-6
         {
-            { BIT00,  "In cache contained IPL",       "" },
-            { BIT01,  "SBE should init all cores",    "" },
-            { BIT02,  "HWP/Init risk level enabled",  "" },
-            { BIT03,  "Boot loader HWP flag to not place 12K exception vectors",  "" },
-            { BIT04,  "Memory synchronous mode",      "" },
-            { BIT05,  "Normal PCI reference clock",  "Slow PCI reference clock" }
+            { 0x10002,  "System IPL phase: 00(hostboot) 01(cache_contained), 10(chip_contained)", "System IPL phase: 00(hostboot) 01(cache_contained), 10(chip_contained)" },
+            { 0x10402,  "Selection of active and backing cores", "Selection of active and backing cores" }
         }
     },
     {
         MAILBOX_SCRATCH_REG_6,
         {
+            { BIT08,  "Force TOD filter PLL into bypass",  "" },
+            { BIT09,  "Force Nest filter PLL into bypass", "" },
+            { BIT10,  "Force IO PLL into bypass",        "" },
+            { BIT11,  "Force IO Spread Specturm PLL into bypass",   "" },
+            { BIT12,  "Force Nest DPLL into bypass", "" },
+            { BIT13,  "Force PAU DPLL into bypass", "" },
+            { BIT14,  "Force all Iohs, Omi, Pcie into bypass", "" },
             { BIT24,  "Indicates Hostboot slave bit, 0b1 == slave",  "Indicates Hostboot slave bit, 0b0 == master" }
+        }
+    },
+    {
+        MAILBOX_SCRATCH_REG_9, // print bits0-15, bits16-31
+        {
+            { 0x10010,  "PAU PLL frequency", "" },
+            { 0x11004,  "MC0 PLL bucket value", ""},
+            { 0x11404,  "MC1 PLL bucket value", ""},
+            { 0x11804,  "MC2 PLL bucket value", ""},
+            { 0x11C04,  "MC3 PLL bucket value", ""}
+        }
+    },
+    {
+        MAILBOX_SCRATCH_REG_10, // print bits0-31
+        {
+            { 0x10304,  "IOHS0 PLL bucket value", ""},
+            { 0x10404,  "IOHS1 PLL bucket value", ""},
+            { 0x10804,  "IOHS2 PLL bucket value", ""},
+            { 0x10C04,  "IOHS3 PLL bucket value", ""},
+            { 0x11004,  "IOHS4 PLL bucket value", ""},
+            { 0x11404,  "IOHS5 PLL bucket value", ""},
+            { 0x11804,  "IOHS6 PLL bucket value", ""},
+            { 0x11C04,  "IOHS7 PLL bucket value", ""}
         }
     },
     {
