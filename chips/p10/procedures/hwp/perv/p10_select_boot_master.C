@@ -42,20 +42,29 @@ fapi2::ReturnCode p10_select_boot_master(const
     using namespace scomt;
     using namespace scomt::perv;
 
-    fapi2::buffer<uint8_t> l_read_attr;
+    fapi2::buffer<uint8_t> l_read_attr_boot, l_read_attr_measurement;
     fapi2::buffer<uint32_t> l_read_reg;
     FAPI_DBG("p10_select_boot_master: Entering ...");
 
     FAPI_INF("Reading ATTR_BACKUP_SEEPROM_SELECT");
     FAPI_TRY(FAPI_ATTR_GET(fapi2::ATTR_BACKUP_SEEPROM_SELECT, i_target_chip,
-                           l_read_attr));
+                           l_read_attr_boot));
+
+    FAPI_INF("Reading ATTR_BACKUP_MEASUREMENT_SEEPROM_SELECT");
+    FAPI_TRY(FAPI_ATTR_GET(fapi2::ATTR_BACKUP_MEASUREMENT_SEEPROM_SELECT, i_target_chip,
+                           l_read_attr_measurement));
 
     // select seeprom image (primary vs secondary) in SBE VITAL
     FAPI_INF("Reading PERV_SB_CS_FSI");
     FAPI_TRY(fapi2::getCfamRegister(i_target_chip, FSXCOMP_FSXLOG_SB_CS_FSI, l_read_reg));
 
-    FAPI_INF("select seeprom image (secondary vs primary)");
-    (l_read_attr.getBit<7>() == 1) ? l_read_reg.setBit<17>() : l_read_reg.clearBit<17>();
+    FAPI_INF("select boot seeprom image (secondary vs primary)"); // bit 17
+    (l_read_attr_boot.getBit<7>() == 1) ? l_read_reg.setBit<FSXCOMP_FSXLOG_SB_CS_SELECT_SECONDARY_SEEPROM>() :
+    l_read_reg.clearBit<FSXCOMP_FSXLOG_SB_CS_SELECT_SECONDARY_SEEPROM>();
+
+    FAPI_INF("select measurement seeprom image (secondary vs primary)"); // bit 18
+    (l_read_attr_measurement.getBit<7>() == 1) ? l_read_reg.setBit<FSXCOMP_FSXLOG_SB_CS_SELECT_SECONDARY_MEAS_SEEPROM>() :
+    l_read_reg.clearBit<FSXCOMP_FSXLOG_SB_CS_SELECT_SECONDARY_MEAS_SEEPROM>();
 
     FAPI_TRY(fapi2::putCfamRegister(i_target_chip, FSXCOMP_FSXLOG_SB_CS_FSI, l_read_reg));
 
