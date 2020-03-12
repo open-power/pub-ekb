@@ -24,5 +24,5 @@
 # IBM_PROLOG_END_TAG
 #
 PROCEDURE=p10_get_sbe_msg_register
-$(call ADD_MODULE_SRCDIR,$(PROCEDURE),$(ROOTPATH)/chips/p9/common/include)
+$(call ADD_MODULE_SRCDIR,$(PROCEDURE),$(ROOTPATH)/chips/p10/common/include)
 $(call BUILD_PROCEDURE)
