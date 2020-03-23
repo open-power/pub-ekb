@@ -26,5 +26,5 @@ PROCEDURE=p10_sbe_localreg_dump
 #$(call ADD_MODULE_INCDIR,$(PROCEDURE),$(ROOTPATH)/chips/p10/common/include/)
 $(call ADD_MODULE_SRCDIR,$(PROCEDURE),$(ROOTPATH)/chips/p10/procedures/hwp/lib)
 OBJS+=p10_sbe_localreg_dump.o
-OBJS+=p10_ppe_common.o
+OBJS+=p10_ppe_utils.o
 $(call BUILD_PROCEDURE)
