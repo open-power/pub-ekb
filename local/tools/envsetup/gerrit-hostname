@@ -26,7 +26,7 @@
 
 ## Usage
 # It is imperative that there are no prints other than the die command or
-# "export GERRIT_SRV=$host" as this script is evaluated by env.bash and not
+# "export GERRIT_SRV=$host" as this script is evaluated by envn.bash and not
 # called directly
 
 use strict;
@@ -74,6 +74,6 @@ if ($host eq "")
 }
 else
 {
-    # Set gerrit server env variable by returning command to env.bash
+    # Set gerrit server envn variable by returning command to envn.bash
     print "export GERRIT_SRV=$host\n";
 }

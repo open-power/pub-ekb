@@ -63,7 +63,7 @@ $ReleaseYear = $ENV{'DATE_OVERRIDE'} if defined $ENV{'DATE_OVERRIDE'};
 my $copyrightSymbol = "";
 # my $copyrightSymbol = "(C)";  # Uncomment if unable to use  character.
 
-# set by environment variable in project env.bash
+# set by environment variable in project envn.bash
 my $projectName = "EKB";
 my $copyrightStr = "COPYRIGHT";
 my $projectRoot = $ENV{'PROJECT_ROOT'};
@@ -76,7 +76,7 @@ my  $DELIMITER_BEGIN        =   'IBM_PROLOG_BEGIN_TAG';
 my  $SOURCE_BEGIN_TAG       =   "\$Source:";
 my  $SOURCE_END_TAG         =   "\$";
 
-# Desired License, set by environment variable in project env.bash
+# Desired License, set by environment variable in project envn.bash
 my $LicenseFile = $ENV{'LICENSE'};
 use constant LICENSE_PROLOG => "LICENSE_PROLOG";
 
