@@ -353,6 +353,40 @@ class buffer
         }
 
         ///
+        /// @brief Get the right-aligned value of one or more bits in the buffer
+        /// @tparam B Bit in buffer to get.
+        /// @tparam C the count of bits to get, defaults to 1
+        /// @return The right-aligned value of the bit range
+        /// @note 0 is left-most
+        ///
+        template< bits_type B, bits_type C = 1>
+        inline T getBits(void) const
+        {
+            return (buffer<T>().template setBit<B, C>() & iv_data) >> (TT::bit_length(iv_data) - B - C);
+        }
+
+        ///
+        /// @brief Get the right-aligned value of one or more bits in the buffer
+        /// @param[in] i_bit the bit number to get.
+        /// @param[in] i_count the count of bits to get, defaults to 1
+        /// @return The right-aligned value of the bit range, or 0 if invalid input received
+        /// @note 0 is left-most
+        ///
+        inline T getBits(const bits_type& i_bit,
+                         const bits_type& i_count = 1) const
+        {
+            buffer<T> l_temp;
+
+            if(l_temp.setBit(i_bit, i_count) != fapi2::FAPI2_RC_SUCCESS)
+            {
+                FAPI_ERR("input out-of-bounds! (bit + count - 1) > %d", TT::bits_per_unit());
+                return 0;
+            }
+
+            return (l_temp & iv_data) >> (TT::bit_length(iv_data) - i_bit - i_count);
+        }
+
+        ///
         /// @brief Set and entire buffer to X's
         /// @tparam X {0,1} depending if you want to clear (0)
         /// or fill (1) a buffer
