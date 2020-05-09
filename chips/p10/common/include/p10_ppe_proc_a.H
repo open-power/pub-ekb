@@ -39,6 +39,7 @@ namespace ppe_proc
 #endif
 
 
+//>> [TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR]
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR = 0x000000a0ull;
 
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR_SBE_START0 = 0;
@@ -53,13 +54,18 @@ static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR_TRIG = 8;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR_XSTOP = 9;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR_SBEHFIFO_RESET = 10;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR_SBEHFIFO_DATA = 11;
+//<< [TP_TPCHIP_PIB_SBE_SBEPM_LCL_EINR]
 // ppe_proc/reg00010.H
 
+//>> [TP_TPCHIP_PIB_SBE_SBEPM_LCL_TBR]
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_TBR = 0x00000140ull;
 
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_TBR_SBE_LCL_TBR_TIMEBASE = 0;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_TBR_SBE_LCL_TBR_TIMEBASE_LEN = 32;
+//<< [TP_TPCHIP_PIB_SBE_SBEPM_LCL_TBR]
 // ppe_proc/reg00010.H
+
+//>>THE END<<
 
 #ifndef __PPE_HCODE__
 }

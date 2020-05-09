@@ -39,6 +39,7 @@ namespace ppe_proc
 #endif
 
 
+//>> [TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG]
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG = 0x00000120ull;
 
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG_EN_DBG = 0;
@@ -58,8 +59,10 @@ static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG_MIB_GPIO = 17;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG_MIB_GPIO_LEN = 3;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG_TRACE_DATA_SEL = 20;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG_TRACE_DATA_SEL_LEN = 4;
+//<< [TP_TPCHIP_PIB_SBE_SBEPM_LCL_DBG]
 // ppe_proc/reg00001.H
 
+//>> [TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR]
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR_RW = 0x00000060ull;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR_WO_CLEAR = 0x00000078ull;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR_WO_OR = 0x00000070ull;
@@ -76,7 +79,10 @@ static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR_TRIG = 8;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR_XSTOP = 9;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR_SBEHFIFO_RESET = 10;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR_SBEHFIFO_DATA = 11;
+//<< [TP_TPCHIP_PIB_SBE_SBEPM_LCL_EITR]
 // ppe_proc/reg00001.H
+
+//>>THE END<<
 
 #ifndef __PPE_HCODE__
 }

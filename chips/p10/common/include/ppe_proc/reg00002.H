@@ -36,6 +36,8 @@ namespace ppe_proc
 
 
 
+//>>THE END<<
+
 #ifndef __PPE_HCODE__
 }
 }

@@ -39,6 +39,7 @@ namespace ppe_proc
 #endif
 
 
+//>> [TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR]
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR_RW = 0x00000040ull;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR_WO_CLEAR = 0x00000058ull;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR_WO_OR = 0x00000050ull;
@@ -55,7 +56,10 @@ static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR_TRIG = 8;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR_XSTOP = 9;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR_SBEHFIFO_RESET = 10;
 static const uint32_t TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR_SBEHFIFO_DATA = 11;
+//<< [TP_TPCHIP_PIB_SBE_SBEPM_LCL_EIPR]
 // ppe_proc/reg00005.H
+
+//>>THE END<<
 
 #ifndef __PPE_HCODE__
 }

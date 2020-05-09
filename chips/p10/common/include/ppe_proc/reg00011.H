@@ -35,6 +35,7 @@ namespace ppe_proc
 #endif
 
 
+//>> PREP_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PREP_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR(const fapi2::Target<K, M, V>& i_target)
 {
@@ -48,7 +49,9 @@ fapi_try_exit:
     return fapi2::current_err;
 #endif
 }
+//<< PREP_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
 
+//>> GET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode GET_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR(const fapi2::Target<K, M, V>& i_target,
         fapi2::buffer<uint64_t>& o_data)
@@ -63,7 +66,9 @@ fapi_try_exit:
     return fapi2::current_err;
 #endif
 }
+//<< GET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
 
+//>> PUT_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
 template< fapi2::TargetType K, fapi2::MulticastType M, typename V >
 static inline fapi2::ReturnCode PUT_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR(const fapi2::Target<K, M, V>& i_target,
         const uint64_t i_data)
@@ -78,8 +83,10 @@ fapi_try_exit:
     return fapi2::current_err;
 #endif
 }
+//<< PUT_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
 
 
+//>> SET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR]
 static inline fapi2::buffer<uint64_t>& SET_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR(
     fapi2::buffer<uint64_t>& i_data,
     fapi2::buffer<uint64_t>& o_data)
@@ -91,11 +98,14 @@ static inline fapi2::buffer<uint64_t>& SET_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE
            TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR_LEN>(i_data);
 #ifdef SCOM_CHECKING
 fapi_try_exit:
-    FAPI_ERR("Invalid dial access TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR chip: %x, ec: %x", scomt::chip, scomt::ec);
+    FAPI_ERR("0:ppe_proc Invalid dial access TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR chip: %x, ec: %x", scomt::chip,
+             scomt::ec);
     return o_data;
 #endif
 }
+//<< SET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR]
 
+//>> SET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR]
 static inline fapi2::buffer<uint64_t>& SET_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR(const uint64_t i_data,
         fapi2::buffer<uint64_t>& o_data)
 {
@@ -106,11 +116,14 @@ static inline fapi2::buffer<uint64_t>& SET_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE
            TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR_LEN>(i_data);
 #ifdef SCOM_CHECKING
 fapi_try_exit:
-    FAPI_ERR("Invalid dial access TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR chip: %x, ec: %x", scomt::chip, scomt::ec);
+    FAPI_ERR("1:ppe_proc Invalid dial access TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR chip: %x, ec: %x", scomt::chip,
+             scomt::ec);
     return o_data;
 #endif
 }
+//<< SET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR]
 
+//>> GET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR]
 static inline fapi2::buffer<uint64_t>& GET_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR(
     fapi2::buffer<uint64_t>& i_data,
     uint64_t& o_data)
@@ -122,11 +135,15 @@ static inline fapi2::buffer<uint64_t>& GET_TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE
            TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR_LEN>(o_data);
 #ifdef SCOM_CHECKING
 fapi_try_exit:
-    FAPI_ERR("Invalid dial access TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR chip: %x, ec: %x", scomt::chip, scomt::ec);
+    FAPI_ERR("4:ppe_proc Invalid dial access TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR chip: %x, ec: %x", scomt::chip,
+             scomt::ec);
     return i_data;
 #endif
 }
+//<< GET_[TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR]
 
+
+//>>THE END<<
 
 #ifndef __PPE_HCODE__
 }
