@@ -39,15 +39,6 @@ namespace ppe_proc
 #endif
 
 
-//>> [TP_TPCHIP_PIB_SBE_SBEPRV_LCL_TPM_RESET]
-static const uint32_t TP_TPCHIP_PIB_SBE_SBEPRV_LCL_TPM_RESET_PPE1 = 0xc0002030ull;
-static const uint32_t TP_TPCHIP_PIB_SBE_SBEPRV_LCL_TPM_RESET_PPE2 = 0xc0002038ull;
-static const uint32_t TP_TPCHIP_PIB_SBE_SBEPRV_LCL_TPM_RESET_RW = 0xc0002020ull;
-
-static const uint32_t TP_TPCHIP_PIB_SBE_SBEPRV_LCL_TPM_RESET_SBE_LCL_TPM_RESET_TPMRST = 0;
-//<< [TP_TPCHIP_PIB_SBE_SBEPRV_LCL_TPM_RESET]
-// ppe_proc/reg00003.H
-
 //>>THE END<<
 
 #ifndef __PPE_HCODE__

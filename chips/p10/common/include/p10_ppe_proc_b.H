@@ -39,14 +39,6 @@ namespace ppe_proc
 #endif
 
 
-//>> [TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
-static const uint32_t TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR = 0x00000160ull;
-
-static const uint32_t TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR = 0;
-static const uint32_t TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR_SBE_LCL_IVPR_LEN = 23;
-//<< [TP_TPCHIP_PIB_SBE_SBEPRV_LCL_IVPR]
-// ppe_proc/reg00011.H
-
 //>>THE END<<
 
 #ifndef __PPE_HCODE__
