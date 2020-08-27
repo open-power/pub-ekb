@@ -39,10 +39,8 @@
 // -------------------------------------------------------------------------------------------------------------------
 
 #include <fapi2.H>
-#include "p10_scom_perv_2.H"
-#include "p10_scom_perv_7.H"
-#include "p10_scom_proc_0.H"
-#include "p10_scom_proc_4.H"
+#include <p10_scom_proc.H>
+#include <p10_scom_perv.H>
 #include <p10_pibmem_dump.H>
 
 
@@ -66,6 +64,9 @@ fapi2::ReturnCode p10_pibmem_dump(
     array_data_t fetch_data;
     fapi2::buffer<uint64_t> l_data64, l_data64_sl_clk_status, ctrl_data, original_ctrl_data;
     fapi2::buffer<uint32_t> l_data32;
+    fapi2::buffer<uint32_t> l_data32_sb_cs;
+    fapi2::buffer<uint32_t> l_data32_cbs_cs;
+    bool sab, sdb;
 
     PIBMEM_START_ARRAY_ADDRESS = P10_PIBMEM_START_ARRAY_ADDRESS;
     DEPTH_OF_ARRAY = P10_DEPTH_OF_ARRAY;
@@ -76,22 +77,38 @@ fapi2::ReturnCode p10_pibmem_dump(
 
 
     FAPI_TRY(getCfamRegister(i_target, perv::FSXCOMP_FSXLOG_ROOT_CTRL0_FSI, l_data32 ));
-    FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CPLT_CTRL1_RW, l_data64));
-    FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CLOCK_STAT_SL, l_data64_sl_clk_status));
+    FAPI_TRY(fapi2::getCfamRegister(i_target, perv::FSXCOMP_FSXLOG_SB_CS_FSI, l_data32_sb_cs));    //0x2808
+    FAPI_TRY(fapi2::getCfamRegister(i_target, perv::FSXCOMP_FSXLOG_CBS_CS_FSI, l_data32_cbs_cs));    //0x2801
 
+    sab = (l_data32_cbs_cs.getBit<perv::FSXCOMP_FSXLOG_CBS_CS_SECURE_ACCESS_BIT>());
+    sdb = (l_data32_sb_cs.getBit<perv::FSXCOMP_FSXLOG_SB_CS_SECURE_DEBUG_MODE>());
 
-    // RC0bits 16,18,19 != 000 && RC0bit16 != 1 && cplt_ctrl[ pib(bit6) sbe(bit5)] != 1 && checking if pib clocks are started
-    if ( ! ((l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_FSI2PCB_DC>()
-             ||  l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_PIB2PCB_DC>()
-             ||  l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_PCB2PCB_DC>())         &&
-            !(l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_FSI2PCB_DC>())            &&
-            !(l_data64.getBit<proc::TP_TPCHIP_TPC_CPLT_CTRL1_TC_REGION2_FENCE_DC>())    &&
-            !(l_data64.getBit<proc::TP_TPCHIP_TPC_CPLT_CTRL1_TC_REGION1_FENCE_DC>())    &&
-            !(l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT2_SL>())))
+    if(sab && !sdb)
     {
-        FAPI_ERR("Invalid Mux config(RC0 bits 16,18,19): %#010lX or Fence setup(CPLT_CTRL1 bits 5(sbe),6(pib)): %#018lX or pib clocks not started: %#018lX to perform pibmem dump. \n",
-                 l_data32, l_data64, l_data64_sl_clk_status);
+        FAPI_ERR("PIBMEM can not be accessed in secure mode without setting secure debug bit");
         goto fapi_try_exit;
+    }
+
+    if(!sab)
+    {
+        FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CPLT_CTRL1_RW, l_data64));
+        FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CLOCK_STAT_SL, l_data64_sl_clk_status));
+
+
+
+        // RC0bits 16,18,19 != 000 && RC0bit16 != 1 && cplt_ctrl[ pib(bit6) sbe(bit5)] != 1 && checking if pib clocks are started
+        if ( ! ((l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_FSI2PCB_DC>()
+                 ||  l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_PIB2PCB_DC>()
+                 ||  l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_PCB2PCB_DC>())         &&
+                !(l_data32.getBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_FSI2PCB_DC>())            &&
+                !(l_data64.getBit<proc::TP_TPCHIP_TPC_CPLT_CTRL1_TC_REGION2_FENCE_DC>())    &&
+                !(l_data64.getBit<proc::TP_TPCHIP_TPC_CPLT_CTRL1_TC_REGION1_FENCE_DC>())    &&
+                !(l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT2_SL>())))
+        {
+            FAPI_ERR("Invalid Mux config(RC0 bits 16,18,19): %#010lX or Fence setup(CPLT_CTRL1 bits 5(sbe),6(pib)): %#018lX or pib clocks not started: %#018lX to perform pibmem dump. \n",
+                     l_data32, l_data64, l_data64_sl_clk_status);
+            goto fapi_try_exit;
+        }
     }
 
     /// The below code enables/disables ECC checking before doing Dump based on inputs from USER.

@@ -75,15 +75,30 @@ fapi2::ReturnCode p10_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_PRO
     FAPI_DBG("Release PCB reset");
     l_data32.flush<0>().setBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_PCB_RESET_DC>();
     FAPI_TRY(putCfamRegister(i_target, perv::FSXCOMP_FSXLOG_ROOT_CTRL0_CLEAR_FSI, l_data32 ));
-
-    FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CLOCK_STAT_SL, l_data64_sl_clk_status));
-
-    pib_clks_not_running = l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT2_SL>();
-    net_clks_not_running = l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT4_SL>();
-
     // only dump registers can be accessed in secure debug mode
     // PERV_CBS_CS_SECURE_ACCESS_BIT = 4,  PERV_SB_CS_SECURE_DEBUG_MODE = 0
     sdb = (l_data32_cbs_cs.getBit<BIT04>() && l_data32_sb_cs.getBit<BIT00>());
+
+    if(l_data32_cbs_cs.getBit<BIT04>() && !l_data32_sb_cs.getBit<BIT00>())
+    {
+        FAPI_ERR("PIB Master Slave registers can not be accessed in secure mode without setting secure debug bit");
+        goto fapi_try_exit;
+    }
+
+    if(!l_data32_cbs_cs.getBit<BIT04>())
+    {
+
+        FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CLOCK_STAT_SL, l_data64_sl_clk_status));
+
+        pib_clks_not_running = l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT2_SL>();
+        net_clks_not_running = l_data64_sl_clk_status.getBit<proc::TP_TPCHIP_TPC_CLOCK_STAT_SL_UNIT4_SL>();
+    }
+    else
+    {
+        pib_clks_not_running = false;
+        net_clks_not_running = false;
+    }
+
 
     if (sdb)
     {
