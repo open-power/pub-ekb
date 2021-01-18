@@ -5,7 +5,7 @@
 <!--                                                                        -->
 <!-- OpenPOWER EKB Project                                                  -->
 <!--                                                                        -->
-<!-- COPYRIGHT 2015,2020                                                    -->
+<!-- COPYRIGHT 2015,2021                                                    -->
 <!-- [+] International Business Machines Corp.                              -->
 <!--                                                                        -->
 <!--                                                                        -->
@@ -39,6 +39,18 @@
     </description>
     <ffdc>TARGET</ffdc>
     <ffdc>TP_TPCHIP_OCC_OCI_OCB_OCCFLG2_RW_reg</ffdc>
+    <callout>
+      <procedure>CODE</procedure>
+      <priority>HIGH</priority>
+    </callout>
+  </hwpError>
+  <hwpError>
+    <rc>RC_DPLL_LOCK_FAIL</rc>
+    <description>
+      PLL failed to lock after frequency change was initiated.
+    </description>
+    <ffdc>DPLL_CNTL_NEST_REGS_STAT</ffdc>
+    <ffdc>TARGET</ffdc>
     <callout>
       <procedure>CODE</procedure>
       <priority>HIGH</priority>
