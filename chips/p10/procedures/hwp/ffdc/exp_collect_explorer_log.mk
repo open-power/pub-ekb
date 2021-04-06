@@ -5,7 +5,7 @@
 #
 # OpenPOWER EKB Project
 #
-# COPYRIGHT 2019,2020
+# COPYRIGHT 2019,2021
 # [+] International Business Machines Corp.
 #
 #
@@ -24,5 +24,6 @@
 # IBM_PROLOG_END_TAG
 PROCEDURE=exp_collect_explorer_log
 $(call ADD_MODULE_INCDIR,$(PROCEDURE),$(ROOTPATH)/chips/ocmb/explorer/procedures/hwp/memory/)
+lib$(PROCEDURE)_DEPLIBS+=exp_fw_log_data
 
 $(call BUILD_PROCEDURE)
