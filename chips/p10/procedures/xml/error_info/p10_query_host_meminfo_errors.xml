@@ -51,6 +51,18 @@
   </hwpError>
   <!-- *********************************************************************** -->
   <hwpError>
+    <rc>RC_P10_QUERY_HOST_MEMINFO_CORE_ECO_ERROR</rc>
+    <ffdc>MASTER_CORE</ffdc>
+    <description>
+        Master core target is in ECO mode, which is unexpected
+    </description>
+    <callout>
+      <procedure>CODE</procedure>
+      <priority>HIGH</priority>
+    </callout>
+  </hwpError>
+  <!-- *********************************************************************** -->
+  <hwpError>
     <rc>RC_P10_QUERY_HOST_MEMINFO_INVALID_SIZE</rc>
     <ffdc>MASTER_CORE</ffdc>
     <description>
