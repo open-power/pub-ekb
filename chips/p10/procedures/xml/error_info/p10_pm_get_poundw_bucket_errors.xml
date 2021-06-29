@@ -5,7 +5,7 @@
 <!--                                                                        -->
 <!-- OpenPOWER EKB Project                                                  -->
 <!--                                                                        -->
-<!-- COPYRIGHT 2019,2020                                                    -->
+<!-- COPYRIGHT 2019,2021                                                    -->
 <!-- [+] International Business Machines Corp.                              -->
 <!--                                                                        -->
 <!--                                                                        -->
@@ -41,8 +41,15 @@
     </callout>
     <callout>
       <procedure>CODE</procedure>
+      <priority>MEDIUM</priority>
+    </callout>
+    <callout>
+      <target>CHIP_TARGET</target>
       <priority>LOW</priority>
     </callout>
+    <deconfigure>
+      <target>CHIP_TARGET</target>
+    </deconfigure>
   </hwpError>
   <!-- ******************************************************************** -->
   <hwpError>
@@ -61,8 +68,15 @@
     </callout>
     <callout>
       <procedure>CODE</procedure>
+      <priority>MEDIUM</priority>
+    </callout>
+    <callout>
+      <target>CHIP_TARGET</target>
       <priority>LOW</priority>
     </callout>
+    <deconfigure>
+      <target>CHIP_TARGET</target>
+    </deconfigure>
   </hwpError>
   <!-- ******************************************************************** -->
   <hwpError>
@@ -80,6 +94,13 @@
       </hw>
       <priority>HIGH</priority>
     </callout>
+    <callout>
+      <target>CHIP_TARGET</target>
+      <priority>LOW</priority>
+    </callout>
+    <deconfigure>
+      <target>CHIP_TARGET</target>
+    </deconfigure>
   </hwpError>
   <!-- ******************************************************************** -->
 </hwpErrors>
