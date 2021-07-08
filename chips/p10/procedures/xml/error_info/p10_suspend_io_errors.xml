@@ -47,6 +47,10 @@
       <target>TARGET</target>
       <priority>HIGH</priority>
     </callout>
+    <!-- Add hw deconfig -->
+    <deconfigure>
+      <target>TARGET</target>
+    </deconfigure>
   </hwpError>
   <!-- ********************************************************************* -->
   <hwpError>
@@ -69,6 +73,10 @@
       <target>TARGET</target>
       <priority>HIGH</priority>
     </callout>
+    <!-- Add hw deconfig -->
+    <deconfigure>
+      <target>TARGET</target>
+    </deconfigure>
   </hwpError>
   <!-- ********************************************************************* -->
 </hwpErrors>
