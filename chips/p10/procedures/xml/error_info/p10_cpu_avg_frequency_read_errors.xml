@@ -5,7 +5,7 @@
 <!--                                                                        -->
 <!-- OpenPOWER EKB Project                                                  -->
 <!--                                                                        -->
-<!-- COPYRIGHT 2019,2020                                                    -->
+<!-- COPYRIGHT 2019,2021                                                    -->
 <!-- [+] International Business Machines Corp.                              -->
 <!--                                                                        -->
 <!--                                                                        -->
@@ -45,26 +45,6 @@
       <procedure>CODE</procedure>
       <priority>HIGH</priority>
     </callout>
-  </hwpError>
-
-  <hwpError>
-    <rc>RC_CPU_AVG_FREQ_SCOM_READ_ERR</rc>
-    <description>
-    Scom read error.
-    </description>
-    <ffdc>TARGET</ffdc>
-    <ffdc>REG_VALUE</ffdc>
-    <!-- No callout/deconfig/gard needed for this error -->
-  </hwpError>
-
-  <hwpError>
-    <rc>RC_CPU_AVG_FREQ_SAMPLE_VALID_ERR</rc>
-    <description>
-    Sample valid read error.
-    </description>
-    <ffdc>TARGET</ffdc>
-    <ffdc>REG_VALUE</ffdc>
-    <!-- No callout/deconfig/gard needed for this error -->
   </hwpError>
 
 </hwpErrors>

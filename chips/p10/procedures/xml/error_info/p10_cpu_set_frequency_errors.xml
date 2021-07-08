@@ -43,6 +43,10 @@
       <procedure>CODE</procedure>
       <priority>HIGH</priority>
     </callout>
+    <callout>
+        <target>TARGET</target>
+        <priority>MEDIUM</priority>
+    </callout>
   </hwpError>
   <hwpError>
     <rc>RC_DPLL_LOCK_FAIL</rc>
@@ -54,6 +58,10 @@
     <callout>
       <procedure>CODE</procedure>
       <priority>HIGH</priority>
+    </callout>
+    <callout>
+        <target>TARGET</target>
+        <priority>MEDIUM</priority>
     </callout>
   </hwpError>
 </hwpErrors>
