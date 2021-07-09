@@ -5,7 +5,7 @@
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
-/* COPYRIGHT 2019,2020                                                    */
+/* COPYRIGHT 2019,2021                                                    */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
 /*                                                                        */
@@ -134,7 +134,8 @@ fapi2::ReturnCode p10_do_fw_hb_istep(
     FAPI_ASSERT((elapsedTimeMs <= i_retry_limit_ms),
                 fapi2::DO_FW_HB_ISTEP_NOT_READY()
                 .set_TARGET(i_target)
-                .set_KEY(key),
+                .set_KEY(key)
+                .set_RETRY_LIMIT_MS(i_retry_limit_ms),
                 "Ready bit for istep mode wasn't set in %" PRIu64 " ms",
                 i_retry_limit_ms);
 
