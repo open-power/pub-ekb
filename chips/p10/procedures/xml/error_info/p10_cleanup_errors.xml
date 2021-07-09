@@ -5,7 +5,7 @@
 <!--                                                                        -->
 <!-- OpenPOWER EKB Project                                                  -->
 <!--                                                                        -->
-<!-- COPYRIGHT 2019,2020                                                    -->
+<!-- COPYRIGHT 2019,2021                                                    -->
 <!-- [+] International Business Machines Corp.                              -->
 <!--                                                                        -->
 <!--                                                                        -->
@@ -33,6 +33,7 @@
   <ffdc>TARGET</ffdc>
   <ffdc>RUNNING</ffdc>
   <ffdc>INITIALIZED</ffdc>
+  <!-- Note: Not consumed by firmware so no callout required -->
 </hwpError>
 <!-- ******************************************************************** -->
 </hwpErrors>
