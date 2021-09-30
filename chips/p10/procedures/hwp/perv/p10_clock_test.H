@@ -5,7 +5,7 @@
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
-/* COPYRIGHT 2016,2020                                                    */
+/* COPYRIGHT 2016,2021                                                    */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
 /*                                                                        */
@@ -48,6 +48,10 @@ typedef fapi2::ReturnCode (*p10_clock_test_FP_t)(const fapi2::Target<fapi2::TARG
 /// @return  FAPI2_RC_SUCCESS if success, else error code.
 extern "C"
 {
+    fapi2::ReturnCode p10_clock_test_loop(
+        const fapi2::Target<fapi2::TARGET_TYPE_PROC_CHIP>& i_target_chip,
+        const uint8_t i_cp_refclock_select);
+
     fapi2::ReturnCode p10_clock_test(const fapi2::Target<fapi2::TARGET_TYPE_PROC_CHIP>& i_target_chip);
 }
 
