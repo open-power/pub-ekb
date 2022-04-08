@@ -5,7 +5,7 @@
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
-/* COPYRIGHT 2019,2021                                                    */
+/* COPYRIGHT 2019,2022                                                    */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
 /*                                                                        */
@@ -38,7 +38,7 @@
 #define SDB_ATTR       0x02   //can be accessed in SDB mode
 #define ERR_SDB_ATTR   0x03   //error status register, which can be accessed in SDB mode
 #define VLD_ATTR       0x04   //value is already available (may not need this)
-
+#define MBX_ATTR       0x08   //MBX to be read in cfam scope
 #define HELP_RC  999
 
 
@@ -97,39 +97,39 @@ std::vector<sReg> const pibms_regs_2dump =
     {OTP_STATUS,                       "OTP_STATUS",                      ERR_ATTR },  //0x10002, error status
     {OTP_CONTROL,                      "OTP_CONTROL",                     ERR_ATTR },  //0x10008, error status
 
-    {MAILBOX_CBS_CTRL_STATUS,          "MAILBOX_CBS_CTRL_STATUS",          NO_ATTR },  //0x50001, default
-    {MAILBOX_CBS_TRACE,                "MAILBOX_CBS_TRACE",                NO_ATTR },  //0x50002
-    {MAILBOX_CBS_ENVSTAT,              "MAILBOX_CBS_ENVSTAT",              NO_ATTR },  //0x50004
-    {MAILBOX_CBS_SELFBOOT_CTRL_STATUS, "MAILBOX_CBS_SELFBOOT_CTRL_STATUS", NO_ATTR },  //0x50008
-    {MAILBOX_CBS_SELFBOOT_MSG,         "MAILBOX_CBS_SELFBOOT_MSG",         NO_ATTR },  //0x50009
-    {MAILBOX_CBS_DEBUG_PERV_CLK,       "MAILBOX_CBS_DEBUG_PERV_CLK",       NO_ATTR },  //0x5000B
-    {MAILBOX_ROOTCTRL0,                "MAILBOX_ROOTCTRL0",                NO_ATTR },  //0x50010
-    {MAILBOX_ROOTCTRL1,                "MAILBOX_ROOTCTRL1",                NO_ATTR },  //0x50011
-    {MAILBOX_ROOTCTRL2,                "MAILBOX_ROOTCTRL2",                NO_ATTR },  //0x50012
-    {MAILBOX_ROOTCTRL3,                "MAILBOX_ROOTCTRL3",                NO_ATTR },  //0x50013
-    {MAILBOX_ROOTCTRL4,                "MAILBOX_ROOTCTRL4",                NO_ATTR },  //0x50014
-    {MAILBOX_ROOTCTRL5,                "MAILBOX_ROOTCTRL5",                NO_ATTR },  //0x50015
-    {MAILBOX_ROOTCTRL6,                "MAILBOX_ROOTCTRL6",                NO_ATTR },  //0x50016
-    {MAILBOX_ROOTCTRL7,                "MAILBOX_ROOTCTRL7",                NO_ATTR },  //0x50017
-    {MAILBOX_ROOTCTRL8,                "MAILBOX_ROOTCTRL8",                NO_ATTR },  //0x50018
-    {MAILBOX_PERVCTRL0,                "MAILBOX_PERVCTRL0",                NO_ATTR },  //0x5001A
-    {MAILBOX_PERVCTRL1,                "MAILBOX_PERVCTRL1",                NO_ATTR },  //0x5001B
-    {MAILBOX_SCRATCH_REG_1,            "MAILBOX_SCRATCH_REG_1",            NO_ATTR },  //0x50038
-    {MAILBOX_SCRATCH_REG_2,            "MAILBOX_SCRATCH_REG_2",            NO_ATTR },  //0x50039
-    {MAILBOX_SCRATCH_REG_3,            "MAILBOX_SCRATCH_REG_3",            NO_ATTR },  //0x5003A
-    {MAILBOX_SCRATCH_REG_4,            "MAILBOX_SCRATCH_REG_4",            NO_ATTR },  //0x5003B
-    {MAILBOX_SCRATCH_REG_5,            "MAILBOX_SCRATCH_REG_5",            NO_ATTR },  //0x5003C
-    {MAILBOX_SCRATCH_REG_6,            "MAILBOX_SCRATCH_REG_6",            NO_ATTR },  //0x5003D
-    {MAILBOX_SCRATCH_REG_7,            "MAILBOX_SCRATCH_REG_7",            NO_ATTR },  //0x5003E
-    {MAILBOX_SCRATCH_REG_8,            "MAILBOX_SCRATCH_REG_8",            NO_ATTR },  //0x5003F
-    {MAILBOX_SCRATCH_REG_9,            "MAILBOX_SCRATCH_REG_9",            NO_ATTR },  //0x50180
-    {MAILBOX_SCRATCH_REG_10,           "MAILBOX_SCRATCH_REG_10",           NO_ATTR },  //0x50181
-    {MAILBOX_SCRATCH_REG_11,           "MAILBOX_SCRATCH_REG_11",           NO_ATTR },  //0x50182
-    {MAILBOX_SCRATCH_REG_12,           "MAILBOX_SCRATCH_REG_12",           NO_ATTR },  //0x50183
-    {MAILBOX_SCRATCH_REG_13,           "MAILBOX_SCRATCH_REG_13",           NO_ATTR },  //0x50184
-    {MAILBOX_SCRATCH_REG_14,           "MAILBOX_SCRATCH_REG_14",           NO_ATTR },  //0x50185
-    {MAILBOX_SCRATCH_REG_15,           "MAILBOX_SCRATCH_REG_15",           NO_ATTR },  //0x50186
-    {MAILBOX_SCRATCH_REG_16,           "MAILBOX_SCRATCH_REG_16",           NO_ATTR },  //0x50187
+    {MAILBOX_CBS_CTRL_STATUS,          "MAILBOX_CBS_CTRL_STATUS",          MBX_ATTR },  //0x50001, default
+    {MAILBOX_CBS_TRACE,                "MAILBOX_CBS_TRACE",                MBX_ATTR },  //0x50002
+    {MAILBOX_CBS_ENVSTAT,              "MAILBOX_CBS_ENVSTAT",              MBX_ATTR },  //0x50004
+    {MAILBOX_CBS_SELFBOOT_CTRL_STATUS, "MAILBOX_CBS_SELFBOOT_CTRL_STATUS", MBX_ATTR },  //0x50008
+    {MAILBOX_CBS_SELFBOOT_MSG,         "MAILBOX_CBS_SELFBOOT_MSG",         MBX_ATTR },  //0x50009
+    {MAILBOX_CBS_DEBUG_PERV_CLK,       "MAILBOX_CBS_DEBUG_PERV_CLK",       MBX_ATTR },  //0x5000B
+    {MAILBOX_ROOTCTRL0,                "MAILBOX_ROOTCTRL0",                MBX_ATTR },  //0x50010
+    {MAILBOX_ROOTCTRL1,                "MAILBOX_ROOTCTRL1",                MBX_ATTR },  //0x50011
+    {MAILBOX_ROOTCTRL2,                "MAILBOX_ROOTCTRL2",                MBX_ATTR },  //0x50012
+    {MAILBOX_ROOTCTRL3,                "MAILBOX_ROOTCTRL3",                MBX_ATTR },  //0x50013
+    {MAILBOX_ROOTCTRL4,                "MAILBOX_ROOTCTRL4",                MBX_ATTR },  //0x50014
+    {MAILBOX_ROOTCTRL5,                "MAILBOX_ROOTCTRL5",                MBX_ATTR },  //0x50015
+    {MAILBOX_ROOTCTRL6,                "MAILBOX_ROOTCTRL6",                MBX_ATTR },  //0x50016
+    {MAILBOX_ROOTCTRL7,                "MAILBOX_ROOTCTRL7",                MBX_ATTR },  //0x50017
+    {MAILBOX_ROOTCTRL8,                "MAILBOX_ROOTCTRL8",                MBX_ATTR },  //0x50018
+    {MAILBOX_PERVCTRL0,                "MAILBOX_PERVCTRL0",                MBX_ATTR },  //0x5001A
+    {MAILBOX_PERVCTRL1,                "MAILBOX_PERVCTRL1",                MBX_ATTR },  //0x5001B
+    {MAILBOX_SCRATCH_REG_1,            "MAILBOX_SCRATCH_REG_1",            MBX_ATTR },  //0x50038
+    {MAILBOX_SCRATCH_REG_2,            "MAILBOX_SCRATCH_REG_2",            MBX_ATTR },  //0x50039
+    {MAILBOX_SCRATCH_REG_3,            "MAILBOX_SCRATCH_REG_3",            MBX_ATTR },  //0x5003A
+    {MAILBOX_SCRATCH_REG_4,            "MAILBOX_SCRATCH_REG_4",            MBX_ATTR },  //0x5003B
+    {MAILBOX_SCRATCH_REG_5,            "MAILBOX_SCRATCH_REG_5",            MBX_ATTR },  //0x5003C
+    {MAILBOX_SCRATCH_REG_6,            "MAILBOX_SCRATCH_REG_6",            MBX_ATTR },  //0x5003D
+    {MAILBOX_SCRATCH_REG_7,            "MAILBOX_SCRATCH_REG_7",            MBX_ATTR },  //0x5003E
+    {MAILBOX_SCRATCH_REG_8,            "MAILBOX_SCRATCH_REG_8",            MBX_ATTR },  //0x5003F
+    {MAILBOX_SCRATCH_REG_9,            "MAILBOX_SCRATCH_REG_9",            MBX_ATTR },  //0x50180
+    {MAILBOX_SCRATCH_REG_10,           "MAILBOX_SCRATCH_REG_10",           MBX_ATTR },  //0x50181
+    {MAILBOX_SCRATCH_REG_11,           "MAILBOX_SCRATCH_REG_11",           MBX_ATTR },  //0x50182
+    {MAILBOX_SCRATCH_REG_12,           "MAILBOX_SCRATCH_REG_12",           MBX_ATTR },  //0x50183
+    {MAILBOX_SCRATCH_REG_13,           "MAILBOX_SCRATCH_REG_13",           MBX_ATTR },  //0x50184
+    {MAILBOX_SCRATCH_REG_14,           "MAILBOX_SCRATCH_REG_14",           MBX_ATTR },  //0x50185
+    {MAILBOX_SCRATCH_REG_15,           "MAILBOX_SCRATCH_REG_15",           MBX_ATTR },  //0x50186
+    {MAILBOX_SCRATCH_REG_16,           "MAILBOX_SCRATCH_REG_16",           MBX_ATTR },  //0x50187
 
     {PIBMEM_CTRL,                      "PIBMEM_CTRL",                     SDB_ATTR },  //0x88000
     {PIBMEM_ADDR_PIB,                  "PIBMEM_ADDR_PIB",                 SDB_ATTR },  //0x88001
