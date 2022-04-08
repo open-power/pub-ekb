@@ -5,7 +5,7 @@
 /*                                                                        */
 /* OpenPOWER EKB Project                                                  */
 /*                                                                        */
-/* COPYRIGHT 2015,2021                                                    */
+/* COPYRIGHT 2015,2022                                                    */
 /* [+] International Business Machines Corp.                              */
 /*                                                                        */
 /*                                                                        */
@@ -22,7 +22,7 @@
 /* permissions and limitations under the License.                         */
 /*                                                                        */
 /* IBM_PROLOG_END_TAG                                                     */
-/// @file p9_pibms_reg_dump.C
+/// @file p10_pibms_reg_dump.C
 /// @brief Dump PIB Masters and Slaves Internal Register contents
 //
 // Change History:
@@ -109,7 +109,9 @@ fapi2::ReturnCode p10_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_PRO
     {
         for (std::vector<sRegV>::iterator itr = regv_set.begin(); itr != regv_set.end(); ++itr)
         {
-            if (!sdb || ((itr->reg).attr & SDB_ATTR))    //only read registers can be accessed in secure debug mode
+            //only read registers which can be accessed in secure debug mode
+            //MBX registers are always accessed using FSI scope
+            if (!sdb || ((itr->reg).attr & SDB_ATTR) || ((itr->reg).attr & MBX_ATTR))
             {
                 addr = (itr->reg).addr;
                 reg_name = (itr->reg).name;
@@ -118,8 +120,17 @@ fapi2::ReturnCode p10_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_PRO
                                                 || (reg_name.find("PSU") != std::string::npos))) &&
                     ! (net_clks_not_running && (reg_name.find("PCBM") != std::string::npos)))
                 {
-                    FAPI_TRY((getScom(i_target , addr , buf)));
-                    itr->value = buf;
+                    if((itr->reg).attr & MBX_ATTR)
+                    {
+                        FAPI_TRY(fapi2::getCfamRegister(i_target, ((addr & 0xFFFF) | 0x2800), l_data32));
+                        itr->value = (0x00000000FFFFFFFFull & l_data32) << 32;
+                    }
+                    else
+                    {
+                        FAPI_TRY((getScom(i_target , addr , buf)));
+                        itr->value = buf;
+                    }
+
                     //mark value is valid
                     (itr->reg).attr |= VLD_ATTR;
                 }
