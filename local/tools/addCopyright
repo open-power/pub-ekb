@@ -91,6 +91,7 @@ use constant GOOGLE => 'Google Inc.';
 use constant INSPUR => 'Inspur Power Systems Corp.';
 use constant SUPERMICRO => 'Super Micro Computer, Inc.';
 use constant YADRO => 'YADRO';
+use constant SYNOPSYS => 'Synopsys, Inc.';
 
 # Create mapping for git contrubitors to companies
 my %fileContributorsCompany = (
@@ -101,6 +102,7 @@ my %fileContributorsCompany = (
     "inspur.com" => INSPUR,
     "supermicro.com" => SUPERMICRO,
     "yadro.com" => YADRO,
+    "Synopsys" => SYNOPSYS,
 );
 
 #------------------------------------------------------------------------------
