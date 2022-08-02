@@ -5,7 +5,7 @@
 #
 # OpenPOWER EKB Project
 #
-# COPYRIGHT 2015,2021
+# COPYRIGHT 2015,2022
 # [+] International Business Machines Corp.
 #
 #
@@ -24,6 +24,7 @@
 # IBM_PROLOG_END_TAG
 PROCEDURE=p10_extract_sbe_rc
 $(call ADD_MODULE_SRCDIR,$(PROCEDURE),$(ROOTPATH)/chips/p10/procedures/hwp/lib)
+$(call ADD_MODULE_INCDIR,$(PROCEDURE),$(ROOTPATH)/chips/p10/procedures/hwp/sbe)
 OBJS+=p10_ppe_common.o
 OBJS+=p10_ppe_utils.o
 $(call BUILD_PROCEDURE)
