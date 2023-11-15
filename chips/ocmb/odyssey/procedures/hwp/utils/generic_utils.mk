@@ -45,3 +45,4 @@ GENERIC_PPE_PROCEDURE = $(eval $(call __GENERIC_PPE_PROCEDURE,$1))
 #
 $(call GENERIC_UTIL_PROCEDURE,ody_pibms_reg_dump)
 $(call GENERIC_UTIL_PROCEDURE,ody_sbe_localreg_dump)
+$(call GENERIC_UTIL_PROCEDURE,ody_pibmem_dump)
