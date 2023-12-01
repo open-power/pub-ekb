@@ -76,7 +76,7 @@ enum SBE_LREGS
 
 };
 
-std::vector<SBEReg_t> v_sbe_local_regs =
+std::vector<SBEReg_t> v_ody_sppe_local_regs =
 {
 
     { SBE_MISC,      "SBE_MISC" },
@@ -117,11 +117,8 @@ fapi2::ReturnCode ody_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
         std::vector<SBESCOMRegValue_t>& v_sbe_local_reg_value)
 
 {
-
     fapi2::buffer<uint64_t> l_data64;
-
     SBESCOMRegValue_t l_regVal;
-
     uint16_t address = 0 ;
     uint32_t scom_address = 0 ;
     uint64_t t_addr;
@@ -135,32 +132,25 @@ fapi2::ReturnCode ody_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
 
     if (force_halt == 0)
     {
-        FAPI_TRY(ppe_poll_halt_state(i_target , PPE_TYPE_SBE, 0));
+        FAPI_TRY(poll_ppe_halt_state(i_target , PPE_TYPE_SBE, 0));
     }
-
     else
-
     {
-        FAPI_INF("ody_sbe_localreg_dump : Forcing halt thru SCOM");
-        FAPI_TRY(ppe_halt(i_target,  PPE_TYPE_SBE, 0));
-        FAPI_TRY(ppe_poll_halt_state(i_target, PPE_TYPE_SBE, 0));
+        FAPI_INF("Forcing halt thruough SCOM");
+        FAPI_TRY(halt_ppe(i_target,  PPE_TYPE_SBE, 0));
+        FAPI_TRY(poll_ppe_halt_state(i_target, PPE_TYPE_SBE, 0));
     }
 
-
-
-
-
-// If SBE is not in halt state
-    FAPI_INF("ody_sbe_localreg_dump : reading XIRAMDBG after polling");
-    t_addr = ppe_get_xir_address(PPE_TYPE_SBE, PPE_IDX_XIRAMDBG, 0);
-    FAPI_TRY(getScom(i_target, t_addr, buf),
-             "Error in GETSCOM");
+    // If SBE is not in halt state
+    FAPI_INF("Reading XIRAMDBG after polling");
+    t_addr = ppe_get_xir_addr(PPE_TYPE_SBE, PPE_IDX_XIRAMDBG, 0);
+    FAPI_TRY(getScom(i_target, t_addr, buf), "Error in GETSCOM");
 
     if (!buf.getBit<0>())
     {
-        FAPI_INF("ody_sbe_localreg_dump : Entering th unhalt state of SBE");
+        FAPI_INF("PPE is not in HALT state");
 
-        for (auto it : v_sbe_local_regs)
+        for (auto it : v_ody_sppe_local_regs)
         {
             // ******************************************************************
             scom_address = 0xC0000000 + it.number ; // defined in enums in p10_ppe_common.H files
@@ -172,27 +162,18 @@ fapi2::ReturnCode ody_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
             v_sbe_local_reg_value.push_back(l_regVal);
             // ******************************************************************
         }
-
-        //  FAPI_TRY(restore_gprs_sprs(i_target , l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
-        FAPI_INF("< ody_sbe_localreg_dump");
-
     }
-
-    // IF SBE is in halt state
-
-    else
+    else //If SBE is in halt state
     {
+        FAPI_INF("PPE is in HALT state");
 
-        //FAPI_INF("p10_sbe_localreg_dump : calling backup_gprs_sprs()...");
+        FAPI_TRY(ppe_save_sprg0_gprs(i_target , PPE_TYPE_SBE, 0, l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
 
-        FAPI_TRY(ppe_save_gprs_sprs(i_target , PPE_TYPE_SBE, 0, l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
-        FAPI_INF("ody_sbe_localreg_dump : Entering the HALT state of SBE");
-
-        for (auto it : v_sbe_local_regs)
+        for (auto it : v_ody_sppe_local_regs)
         {
             // ******************************************************************
             address = it.number ; // defined in enums in p10_ppe_common.H files
-            FAPI_TRY(ppe_local_reg_read(i_target , PPE_TYPE_SBE, 0, address , buf ));
+            FAPI_TRY(read_local_ppe_regs(i_target , PPE_TYPE_SBE, 0, address , buf ));
 
             //  FAPI_INF(" %-6s : Local_reg_addr :  0xC000_%04x :  0x%016lX \n",it.name.c_str() , it.number , buf);
             l_regVal.reg = it;
@@ -201,11 +182,11 @@ fapi2::ReturnCode ody_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_
             // ******************************************************************
         }
 
-        FAPI_TRY(ppe_restore_gprs_sprs(i_target , PPE_TYPE_SBE, 0, l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
-        FAPI_INF("< ody_sbe_localreg_dump");
+        FAPI_TRY(ppe_restore_sprg0_gprs(i_target , PPE_TYPE_SBE, 0, l_gpr0_save, l_gpr1_save, l_gpr9_save, l_sprg0_save ));
     }
 
 
 fapi_try_exit:
+    FAPI_INF("< ody_sbe_localreg_dump");
     return fapi2::current_err;
 }

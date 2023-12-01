@@ -35,8 +35,8 @@
 ///
 
 
-#ifndef __P10_SBE_LOCALREG_DUMP_H__
-#define __P10_SBE_LOCALREG_DUMP_H__
+#ifndef __ODY_SBE_LOCALREG_DUMP_H__
+#define __ODY_SBE_LOCALREG_DUMP_H__
 typedef struct
 {
     uint16_t     number;

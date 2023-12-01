@@ -33,8 +33,8 @@
 /// *HWP Team            : PM
 /// *HWP Level           : 3
 /// *HWP Consumed by     : Cronus, HB, FSP
-#ifndef __P10_PPE_UTILS_H__
-#define __P10_PPE_UTILS_H__
+#ifndef __ODY_PPE_UTILS_H__
+#define __ODY_PPE_UTILS_H__
 
 #include <map>
 #include <fapi2.H>
@@ -168,7 +168,7 @@ enum PPE_REGS
     PPE_XSR,
 };
 
-static std::map<enum PPE_REGS, uint32_t> v_ppe_reg_number =
+static std::map<enum PPE_REGS, uint32_t> v_ppe_reg_num =
 {
     //SPRs
     { PPE_CTR,   9      },
@@ -326,27 +326,9 @@ enum PPE_XCR_DEFS
     PPE_XCR_FORCE_HALT          = 7
 };
 
-const char* ppe_get_name(enum PPE_TYPES ppe_type, uint32_t ppe_instance_num);
+uint32_t ppe_get_reg_num(enum PPE_REGS reg);
 
-uint64_t ppe_get_base_address(enum PPE_TYPES ppe_type, uint32_t ppe_instance_num);
-
-const char* ppe_get_reg_name(enum PPE_REGS reg);
-
-uint32_t ppe_get_reg_number(enum PPE_REGS reg);
-
-const char* ppe_get_other_reg_name(enum PPE_TYPES ppe_type, uint16_t idx);
-
-uint32_t ppe_get_xir_vdr_flag(enum PPE_TYPES ppe_type);
-
-uint64_t ppe_get_xir_address(enum PPE_TYPES ppe_type, enum PPE_XIRS_IDX xir_idx, uint32_t ppe_instance_num);
-uint64_t ppe_get_vdr_address(enum PPE_TYPES ppe_type, enum PPE_VDRS_IDX vdr_idx, uint32_t ppe_instance_num);
-uint64_t ppe_get_mib_address(enum PPE_TYPES ppe_type, enum PPE_MIB_IDX mib_idx, uint32_t ppe_instance_num);
-uint64_t ppe_get_other_address(enum PPE_TYPES ppe_type, uint16_t idx, uint32_t ppe_instance_num);
-
-std::map<uint16_t, uint64_t> ppe_get_mib_offsets(enum PPE_TYPES ppe_type);
-
-std::map<uint16_t, uint64_t> ppe_get_other_offsets(enum PPE_TYPES ppe_type);
-
+uint64_t ppe_get_xir_addr(enum PPE_TYPES ppe_type, enum PPE_XIRS_IDX xir_idx, uint32_t ppe_instance_num);
 
 ///--------------------------------------------------------------------------------------
 /// @brief generates a PPE instruction for some formats
@@ -356,7 +338,7 @@ std::map<uint16_t, uint64_t> ppe_get_other_offsets(enum PPE_TYPES ppe_type);
 /// @param[in] i_d       Instruction Data Field
 /// @return returns 32 bit instruction representing the PPE instruction.
 ///--------------------------------------------------------------------------------------
-uint32_t ppe_get_inst( const uint16_t i_Op, const uint16_t i_Rts, const uint16_t i_Ra, const uint16_t i_d );
+uint32_t ppe_get_instr( const uint16_t i_Op, const uint16_t i_Rts, const uint16_t i_Ra, const uint16_t i_d );
 
 ///--------------------------------------------------------------------------------------
 /// @brief generates instruction for mtspr
@@ -364,7 +346,7 @@ uint32_t ppe_get_inst( const uint16_t i_Op, const uint16_t i_Rts, const uint16_t
 /// @param[in] i_Spr represents spr where data is to be moved.
 /// @return returns 32 bit instruction representing mtspr instruction.
 ///--------------------------------------------------------------------------------------
-uint32_t ppe_get_inst_mtspr( const uint16_t i_Rs, const uint16_t i_Spr );
+uint32_t ppe_get_instr_mtspr( const uint16_t i_Rs, const uint16_t i_Spr );
 
 
 ///--------------------------------------------------------------------------------------
@@ -374,7 +356,7 @@ uint32_t ppe_get_inst_mtspr( const uint16_t i_Rs, const uint16_t i_Spr );
 /// @return returns 32 bit instruction representing mfspr instruction.
 ///--------------------------------------------------------------------------------------
 
-uint32_t ppe_get_inst_mfspr( const uint16_t i_Rt, const uint16_t i_Spr );
+uint32_t ppe_get_instr_mfspr( const uint16_t i_Rt, const uint16_t i_Spr );
 
 ///--------------------------------------------------------------------------------------
 /// @brief generates instruction for mfmsr instruction.
@@ -382,7 +364,7 @@ uint32_t ppe_get_inst_mfspr( const uint16_t i_Rt, const uint16_t i_Spr );
 /// @return  returns 32 bit instruction representing mfmsr instruction.
 /// @note    moves contents of register MSR to i_Rt register.
 ///--------------------------------------------------------------------------------------
-uint32_t ppe_get_inst_mfmsr( const uint16_t i_Rt );
+uint32_t ppe_get_instr_mfmsr( const uint16_t i_Rt );
 
 ///--------------------------------------------------------------------------------------
 /// @brief generates instruction for mfcr instruction.
@@ -390,7 +372,7 @@ uint32_t ppe_get_inst_mfmsr( const uint16_t i_Rt );
 /// @return  returns 32 bit instruction representing mfcr instruction.
 /// @note    moves contents of register CR to i_Rt register.
 ///--------------------------------------------------------------------------------------
-uint32_t ppe_get_inst_mfcr( const uint16_t i_Rt );
+uint32_t ppe_get_instr_mfcr( const uint16_t i_Rt );
 
 ///--------------------------------------------------------------------------------------
 /// @brief Halts the engine(if not already in halted state)
@@ -399,21 +381,9 @@ uint32_t ppe_get_inst_mfcr( const uint16_t i_Rt );
 /// @return  fapi2::ReturnCode
 /// @note    programs XCR with halt bit to halt the engine.
 ///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_halt(
+fapi2::ReturnCode halt_ppe(
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
     enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num);
-
-///--------------------------------------------------------------------------------------
-/// @brief Force Halts the engine(if not already in halted state).
-/// @param[in]  i_target fapi2 target for proc chip
-/// @param[in]  i_base_address  base SCOM address of the PPE
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR with force halt to force halt the engine.
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_force_halt(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num );
-
 
 ///--------------------------------------------------------------------------------------
 /// @brief polls for Halt state. If halt state not detected then will eventually times out
@@ -422,79 +392,9 @@ fapi2::ReturnCode ppe_force_halt(
 /// @return  fapi2::ReturnCode
 /// @note    moves contents of register MSR to i_Rt register.
 ///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_poll_halt_state(
+fapi2::ReturnCode poll_ppe_halt_state(
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
     enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num) ;
-
-///--------------------------------------------------------------------------------------
-/// @brief Determine if the PPE is halted
-/// @param[in]   i_target        target
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @param[out]  o_halted        boolean true if halted; false otherwise
-/// @return  fapi2::ReturnCode
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_is_halted(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type,
-    uint32_t i_ppe_instance_num,
-    bool& o_halted);
-
-///--------------------------------------------------------------------------------------
-/// @brief xcr resume
-/// @param[in]  i_target fapi2 target for proc chip
-/// @param[in]  i_base_address  base SCOM address of the PPE
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR to only resume and return(Does not wait for halt state to enter)
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_resume(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num );
-
-
-///--------------------------------------------------------------------------------------
-/// @brief resume the halted engine
-/// @param[in]  i_target fapi2 target for proc chip
-/// @param[in]  i_base_address  base SCOM address of the PPE
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR with resume bit and then waits for engine to be in halted state(or timeouts).
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_resume_w_poll(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num );
-
-///--------------------------------------------------------------------------------------
-/// @brief update dbcr
-/// @param[in]  i_target fapi2 target for proc chip
-/// @param[in]  i_base_address  base SCOM address of the PPE
-/// @param[in]  i_inst_op       instruction opcode
-/// @param[in]  i_immed_16      16 bit constant
-/// @param[in]  i_Rs            source GPR number
-/// @return  fapi2::ReturnCode
-/// @note    programs mtdbcr
-///--------------------------------------------------------------------------------------
-
-fapi2::ReturnCode ppe_update_dbcr(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type,
-    uint32_t i_ppe_instance_num,
-    const uint64_t i_inst_op,
-    const uint16_t i_immed_16,
-    const uint16_t i_Rs );
-
-///--------------------------------------------------------------------------------------
-/// @brief update dacr
-/// @param[in]   i_target  target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @param[in]   i_address       address to be updated
-/// @return      fapi2::ReturnCode
-/// @note        programs mtdacr
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_update_dacr(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type,
-    uint32_t i_ppe_instance_num,
-    const uint64_t i_address,
-    const uint16_t i_Rs );
 
 ///--------------------------------------------------------------------------------------
 /// @brief Perform RAM "read" operation
@@ -504,7 +404,6 @@ fapi2::ReturnCode ppe_update_dacr(
 /// @param[out]  o_data          Returned data
 /// @return  fapi2::ReturnCode
 ///--------------------------------------------------------------------------------------
-
 fapi2::ReturnCode ppe_ram_read(
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
     enum PPE_TYPES i_ppe_type,
@@ -512,114 +411,8 @@ fapi2::ReturnCode ppe_ram_read(
     const fapi2::buffer<uint64_t> i_instruction,
     fapi2::buffer<uint32_t>& o_data );
 
-///--------------------------------------------------------------------------------------
-/// @brief Perform RAM "read" operation
-/// @param[in]   i_target        Chip Target
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @param[in]   i_instruction   RAM instruction to move a register
-/// @return  fapi2::ReturnCode
-///--------------------------------------------------------------------------------------
-
-fapi2::ReturnCode ppe_ram(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type,
-    uint32_t i_ppe_instance_num,
-    const uint64_t i_instruction
-);
-
-///--------------------------------------------------------------------------------------
-/// @brief single step the engine
-/// @param[in]   i_target  target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @param[in]   i_Rs
-/// @param[in]   i_step_count
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR with single step to single step the engine.
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_single_step_w_dbcr_clr(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type,
-    uint32_t i_ppe_instance_num,
-    const uint16_t i_Rs,
-    uint64_t i_step_count );
-
-///--------------------------------------------------------------------------------------
-/// @brief single step the engine
-/// @param[in]   i_target  target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @param[in]   i_step_count
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR with single step no clearing DBCR
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_single_step(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type,
-    uint32_t i_ppe_instance_num,
-    uint64_t i_step_count );
-
-///--------------------------------------------------------------------------------------
-/// @brief clear the dbg status engine
-/// @param[in]   i_target  target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR to clear dbg status.
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_clear_dbg(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num);
-
-///--------------------------------------------------------------------------------------
-/// @brief toggle TRH
-/// @param[in]   i_target  target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR to toggle trh.
-///--------------------------------------------------------------------------------------
-fapi2::ReturnCode ppe_toggle_trh(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num );
-
-///--------------------------------------------------------------------------------------
-/// @brief xcr soft reset
-/// @param[in]   i_target  target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR to give soft reset
-///--------------------------------------------------------------------------------------
-
-fapi2::ReturnCode ppe_soft_reset(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num );
-
-///--------------------------------------------------------------------------------------
-/// @brief xcr hard reset
-/// @param[in]   i_target        target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR to give hard reset
-///--------------------------------------------------------------------------------------
-
-fapi2::ReturnCode ppe_hard_reset(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type, uint32_t i_ppe_instance_num );
-
-///--------------------------------------------------------------------------------------
-/// @brief populate IAR register with a given address
-/// @param[in]   i_target        target register number
-/// @param[in]   i_base_address  base SCOM address of the PPE
-/// @param[in]   i_address       address to be populated
-/// @return  fapi2::ReturnCode
-/// @note    programs XCR with single step no clearing DBCR
-///--------------------------------------------------------------------------------------
-
-fapi2::ReturnCode ppe_write_iar(
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-    enum PPE_TYPES i_ppe_type,
-    const uint64_t i_address, uint32_t i_ppe_instance_num );
-
-
 #ifndef  __HOSTBOOT_MODULE
-fapi2::ReturnCode ppe_save_gprs_sprs(
+fapi2::ReturnCode ppe_save_sprg0_gprs(
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
     enum PPE_TYPES i_ppe_type,
     uint32_t i_ppe_instance_num,
@@ -628,7 +421,7 @@ fapi2::ReturnCode ppe_save_gprs_sprs(
     fapi2::buffer<uint32_t>& l_gpr9_save,
     fapi2::buffer<uint64_t>& l_sprg0_save);
 
-fapi2::ReturnCode ppe_restore_gprs_sprs(
+fapi2::ReturnCode ppe_restore_sprg0_gprs(
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
     enum PPE_TYPES i_ppe_type,
     uint32_t i_ppe_instance_num,
@@ -637,14 +430,12 @@ fapi2::ReturnCode ppe_restore_gprs_sprs(
     fapi2::buffer<uint32_t> l_gpr9_save,
     fapi2::buffer<uint64_t> l_sprg0_save);
 
-
-fapi2::ReturnCode ppe_local_reg_read(
+fapi2::ReturnCode read_local_ppe_regs(
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
     enum PPE_TYPES i_ppe_type,
     uint32_t i_ppe_instance_num,
     const uint16_t i_local_address,
     fapi2::buffer<uint64_t>& o_data);
-
 
 #endif  //__HOSTBOOT_MODULE
 #endif  // __P10_PPE_UTILS_H__
