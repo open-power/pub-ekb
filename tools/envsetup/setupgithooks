@@ -33,19 +33,34 @@ then
     # Get hooks from Gerrit, if needed.
     if [ ! -f $HOOKSDIR/commit-msg ]
     then
-        echo "Copying Gerrit hooks..."
-        ssh_ver=$(ssh -V 2>&1)
-        echo "ssh_ver: $ssh_ver"
-        ssh_ver_maj=$(echo $ssh_ver|cut -d ' ' -f1|cut -d ',' -f1|cut -d '_' -f2|cut -d '.' -f1)
-        echo "ssh_ver_maj: $ssh_ver_maj"
-
-        if [[ ($ssh_ver_maj < 9) ]]
+        # The 'commit-msg' file on the updated gerrit server uses features that are
+        # not available on older versions of git. To circumvent this, an older
+        # version of that file has been stored in this repository, which will be
+        # used instead of pulling the latest from the gerrit server.
+        if (echo min version 2.2.0; git --version) | sort -Vk3 | tail -1 | grep -q min
         then
-            echo "ssh_ver_maj is less than 9"
-            scp -p -q $GERRIT_SRV:hooks/commit-msg $HOOKSDIR || exit -1
+            echo "Copying legacy Gerrit hooks.."
+
+            cp "$EKBHOOKSDIR/commit-msg-for-old-git" "$HOOKSDIR/commit-msg"
         else
-            echo "ssh_ver_maj is equal to or greater than 9"
-            scp -O -p -q $GERRIT_SRV:hooks/commit-msg $HOOKSDIR || exit -1
+            echo "Copying Gerrit hooks from server..."
+
+            # Newer SSH clients will need to use the legacy SCP protocols ('-O' option)
+            # because the Gerrit server has not enabled SFTP yet. This option is needed
+            # starting with OpenSSH_9.0p1, OpenSSL 1.1.1f (31 Mar 2020).
+            ssh_ver=$(ssh -V 2>&1)
+            echo "ssh_ver: $ssh_ver"
+            ssh_ver_maj=$(echo $ssh_ver|cut -d ' ' -f1|cut -d ',' -f1|cut -d '_' -f2|cut -d '.' -f1)
+            echo "ssh_ver_maj: $ssh_ver_maj"
+
+            if [[ ($ssh_ver_maj < 9) ]]
+            then
+                echo "ssh_ver_maj is less than 9"
+                scp -p -q $GERRIT_SRV:hooks/commit-msg $HOOKSDIR || exit -1
+            else
+                echo "ssh_ver_maj is equal to or greater than 9"
+                scp -O -p -q $GERRIT_SRV:hooks/commit-msg $HOOKSDIR || exit -1
+            fi
         fi
     fi
 
