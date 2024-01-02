@@ -1,0 +1,198 @@
+<!-- IBM_PROLOG_BEGIN_TAG                                                   -->
+<!-- This is an automatically generated prolog.                             -->
+<!--                                                                        -->
+<!-- $Source: chips/ocmb/odyssey/procedures/xml/error_info/ody_extract_sbe_rc_errors.xml $ -->
+<!--                                                                        -->
+<!-- IBM CONFIDENTIAL                                                       -->
+<!--                                                                        -->
+<!-- EKB Project                                                            -->
+<!--                                                                        -->
+<!-- COPYRIGHT 2020,2023                                                    -->
+<!-- [+] International Business Machines Corp.                              -->
+<!--                                                                        -->
+<!--                                                                        -->
+<!-- The source code for this program is not published or otherwise         -->
+<!-- divested of its trade secrets, irrespective of what has been           -->
+<!-- deposited with the U.S. Copyright Office.                              -->
+<!--                                                                        -->
+<!-- IBM_PROLOG_END_TAG                                                     -->
+<!-- File: ody_extract_sbe_rc_errors.xml -->
+<!-- Halt codes for ody_extract_sbe_rc -->
+
+<!--
+    NOTE this error XML should never deconfigure or guard anything; these decisions
+    will be made by HWSV based on the error history and the action returned by the
+    procedure.
+-->
+
+<hwpErrors>
+  <!-- ******************************************************************** -->
+  <!-- Halt codes for PPE -->
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_SPPE_RUNNING</rc>
+    <description>
+    SBE engine is in running state, but an error was raised by external FW code.
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_SCOM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+    <collectRegisterFfdc><id>ROOT_CTRL_REGS_SCOM</id>        <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+    <collectRegisterFfdc><id>PERV_CTRL_REGS_SCOM</id>        <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+    <collectRegisterFfdc><id>SBE_IPL_SCRATCH_REGS_SCOM</id>  <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_PROGRAM_INTERRUPT</rc>
+    <description>
+    Program interrupt promoted
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_INST_STORE_INTR</rc>
+    <description>
+    Instruction storage interrupt
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_ALIGN_INTR</rc>
+    <description>
+    Alignment interrupt
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_DATA_STORE_INTR</rc>
+    <description>
+    Data storage interrupt
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_OTP_UNCORR_ERR</rc>
+    <description>
+    Uncorrectable error detected in OTPROM memory read
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_OTP_ECC_ERR</rc>
+    <description>
+    Parity/ECC error detected in OTPROM memory
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_OTP_TIMEOUT</rc>
+    <description>
+    PIB Timeout error detected during access to OTPROM
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_OTP_PIB_ERR</rc>
+    <description>
+    Scom error or 10.2 chipop error detected
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_ADDR_NOT_RECOGNIZED</rc>
+    <description>
+    Address scope out of range
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_PIBMEM_ECC_ERR</rc>
+    <description>
+    Uncorrectable error occurred while PIB memory access
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_SPI_CLK_ERR</rc>
+    <description>
+    SPI is configured with invalid clock divider (less than 0x4) error detected
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_SPI_ECC_ERR</rc>
+    <description>
+    There are 2 bit flips in read data which cannot be corrected
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_SPI_SPRM_CFG_ERR</rc>
+    <description>
+    SPI configuration error detected
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_SPI_RSC_ERR</rc>
+    <description>
+    SPI resources being accessed is not available. Port multiplexer or lock error detected
+    </description>
+    <ffdc>OCCURRENCE</ffdc>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_SECURE_BOOT_FAIL</rc>
+    <description>
+    Secure boot failed (any error code starting with 0x1-0x5) 
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <ffdc>ERROR_CODE</ffdc>
+    <ffdc>SCRATCH_REGISTER_13</ffdc>
+    <ffdc>SB_MSG</ffdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+  <hwpError>
+    <rc>RC_PIBMEM_PIB_ERR</rc>
+    <description>
+    Error detected during pibmem access
+    </description>
+    <ffdc>TARGET_CHIP</ffdc>
+    <collectRegisterFfdc><id>CBS_STATUS_REGS_CFAM</id>       <targetType>TARGET_TYPE_OCMB_CHIP</targetType><target>TARGET_CHIP</target></collectRegisterFfdc>
+  </hwpError>
+  <!-- ******************************************************************** -->
+</hwpErrors>
