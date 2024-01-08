@@ -34,32 +34,25 @@
 /// *Level       : my
 ///
 
-
 #ifndef __ODY_SBE_LOCALREG_DUMP_H__
 #define __ODY_SBE_LOCALREG_DUMP_H__
 typedef struct
 {
     uint16_t     number;
     std::string  name;
-} SBEReg_t;
+} SBE_Reg_t;
 
 typedef struct
 {
-    SBEReg_t    reg;
-    uint32_t    value;
-} SBERegValue_t;
-
-typedef struct
-{
-    SBEReg_t    reg;
+    SBE_Reg_t    reg;
     uint64_t    value;
-} SBESCOMRegValue_t;
+} SBE_SCOMReg_Value_t;
 
 
 /// @typedef p10_sbe_localreg_dump_FP_t
 /// function pointer typedef definition for HWP call support
 typedef fapi2::ReturnCode (*ody_sbe_localreg_dump_FP_t) (
-    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>&, const uint16_t force_halt , std::vector<SBESCOMRegValue_t>& );
+    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>&, const uint16_t force_halt , std::vector<SBE_SCOMReg_Value_t>& );
 
 
 extern "C"
@@ -71,7 +64,7 @@ extern "C"
 /// @return FAPI2_RC_SUCCESS
     fapi2::ReturnCode
     ody_sbe_localreg_dump(const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target , const uint16_t force_halt ,
-                          std::vector<SBESCOMRegValue_t>& v_sbe_local_reg_value
+                          std::vector<SBE_SCOMReg_Value_t>& v_sbe_local_reg_value
                          );
 
 } // extern C

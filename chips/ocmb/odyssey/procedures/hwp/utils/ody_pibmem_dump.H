@@ -37,17 +37,17 @@
 
 typedef struct
 {
-    uint32_t read_addr;
-    uint64_t read_data;
-} array_data_t;
+    uint32_t rd_addr;
+    uint64_t rd_data;
+} pibmem_array_data_t;
 
 typedef enum
 {
-    START_TILL_END = 0,                         // Dump complete PIBMEM Array contents
-    INTERMEDIATE_TILL_END = 1,                  // Dump from Address till End of PIBMEM
-    START_TILL_INTERMEDIATE = 2,                // Dump from Start till Number of Bytes
-    INTERMEDIATE_TILL_INTERMEDIATE = 3          // Dump from Address till Number of Bytes
-} user_options;
+    START_TO_END = 0,                         // Dump complete PIBMEM array content
+    INTERMEDIATE_TO_END = 1,                  // Dump from a given start address to end of PIBMEM
+    START_TO_INTERMEDIATE = 2,                // Dump from start to given no.of bytes
+    INTERMEDIATE_TO_INTERMEDIATE = 3          // Dump from an address to given no.of bytes
+} usr_options;
 
 /// @typedef ody_pibmem_dump_FP_t
 /// function pointer typedef definition for HWP call support
@@ -55,9 +55,9 @@ typedef fapi2::ReturnCode (*ody_pibmem_dump_FP_t) (
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>&,
     const uint32_t,
     const uint32_t,
-    const user_options,
+    const usr_options,
     const bool,
-    std::vector<array_data_t>&);
+    std::vector<pibmem_array_data_t>&);
 
 extern "C"
 {
@@ -69,8 +69,8 @@ extern "C"
     ody_pibmem_dump(const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
                     const uint32_t i_start_byte,
                     const uint32_t i_num_of_byte,
-                    const user_options i_input_switches,
+                    const usr_options i_input_switches,
                     const bool i_ecc_enable,
-                    std::vector<array_data_t>& o_pibmem_contents);
+                    std::vector<pibmem_array_data_t>& o_pibmem_contents);
 
 } // extern C

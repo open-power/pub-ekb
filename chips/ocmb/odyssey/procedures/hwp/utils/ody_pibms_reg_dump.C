@@ -53,7 +53,7 @@
 /// @retval ERROR defined in xml
 
 fapi2::ReturnCode ody_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-                                      std::vector<sRegV>& regv_set)
+                                      std::vector<sRegVOdy>& regv_set)
 {
     using namespace scomt;
 
@@ -69,23 +69,23 @@ fapi2::ReturnCode ody_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_OCM
 
     fapi2::buffer<uint64_t> buf;
 
-    FAPI_TRY(fapi2::getCfamRegister(i_target, PERV_CBS_CS_FSI, l_data32_cbs_cs));  //0x2801
-    FAPI_TRY(fapi2::getCfamRegister(i_target, PERV_SB_CS_FSI, l_data32_sb_cs));    //0x2808
+    FAPI_TRY(fapi2::getCfamRegister(i_target, PERV_CBS_CS_FSI_ODY, l_data32_cbs_cs));  //0x2801
+    FAPI_TRY(fapi2::getCfamRegister(i_target, PERV_SB_CS_FSI_ODY, l_data32_sb_cs));    //0x2808
 
     FAPI_DBG("Release PCB reset");
     l_data32.flush<0>().setBit<perv::FSXCOMP_FSXLOG_ROOT_CTRL0_PCB_RESET_DC>();
     FAPI_TRY(putCfamRegister(i_target, perv::FSXCOMP_FSXLOG_ROOT_CTRL0_CLEAR_FSI, l_data32 ));
     // only dump registers can be accessed in secure debug mode
     // PERV_CBS_CS_SECURE_ACCESS_BIT = 4,  PERV_SB_CS_SECURE_DEBUG_MODE = 0
-    sdb = (l_data32_cbs_cs.getBit<BIT04>() && l_data32_sb_cs.getBit<BIT00>());
+    sdb = (l_data32_cbs_cs.getBit<BIT04_ODY>() && l_data32_sb_cs.getBit<BIT00_ODY>());
 
-    if(l_data32_cbs_cs.getBit<BIT04>() && !l_data32_sb_cs.getBit<BIT00>())
+    if(l_data32_cbs_cs.getBit<BIT04_ODY>() && !l_data32_sb_cs.getBit<BIT00_ODY>())
     {
         FAPI_ERR("PIB Master Slave registers can not be accessed in secure mode without setting secure debug bit");
         goto fapi_try_exit;
     }
 
-    if(!l_data32_cbs_cs.getBit<BIT04>())
+    if(!l_data32_cbs_cs.getBit<BIT04_ODY>())
     {
 
         FAPI_TRY(getScom(i_target, proc::TP_TPCHIP_TPC_CLOCK_STAT_SL, l_data64_sl_clk_status));
@@ -107,7 +107,7 @@ fapi2::ReturnCode ody_pibms_reg_dump( const fapi2::Target<fapi2::TARGET_TYPE_OCM
 
     if (regv_set.size())
     {
-        for (std::vector<sRegV>::iterator itr = regv_set.begin(); itr != regv_set.end(); ++itr)
+        for (std::vector<sRegVOdy>::iterator itr = regv_set.begin(); itr != regv_set.end(); ++itr)
         {
             //only read registers which can be accessed in secure debug mode
             //MBX registers are always accessed using FSI scope

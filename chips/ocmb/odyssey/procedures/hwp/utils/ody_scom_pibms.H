@@ -23,61 +23,61 @@
 /*                                                                        */
 /* IBM_PROLOG_END_TAG                                                     */
 
-#ifndef __pibms_H_
-#define __pibms_H_
+#ifndef __ody_pibms_H_
+#define __ody_pibms_H_
 
-const uint64_t PERV_FSI2PIB_STATUS_FSI = 0x1007;
+const uint64_t PERV_FSI2PIB_STATUS_FSI_ODY = 0x1007;
 //const uint64_t PERV_TP_PLL_LOCK_REG = 0x010F0019;
 
-const uint64_t PERV_CBS_CS_FSI = 0x2801;
-const uint64_t PERV_SB_CS_FSI  = 0x2808;
+const uint64_t PERV_CBS_CS_FSI_ODY = 0x2801;
+const uint64_t PERV_SB_CS_FSI_ODY  = 0x2808;
 
-const uint8_t  PERV_CBS_CS_SECURE_ACCESS_BIT = 4;
-const uint8_t  PERV_SB_CS_SECURE_DEBUG_MODE  = 0;
+const uint8_t  PERV_CBS_CS_SECURE_ACCESS_BIT_ODY = 4;
+const uint8_t  PERV_SB_CS_SECURE_DEBUG_MODE_ODY  = 0;
 
 
-const uint64_t OTP_STATUS           = 0x00010002;
-const uint64_t OTP_SECURITY_SWITCH  = 0x00010005;
-const uint64_t OTP_CONTROL          = 0x00010008;
+const uint64_t OTP_STATUS_ODY           = 0x00010002;
+const uint64_t OTP_SECURITY_SWITCH_ODY  = 0x00010005;
+const uint64_t OTP_CONTROL_ODY          = 0x00010008;
 
-const uint64_t MAILBOX_CBS_CTRL_STATUS           = 0x00050001;
-const uint64_t MAILBOX_CBS_TRACE                 = 0x00050002;
-const uint64_t MAILBOX_CBS_ENVSTAT               = 0x00050004;
-const uint64_t MAILBOX_CBS_SELFBOOT_CTRL_STATUS  = 0x00050008;
-const uint64_t MAILBOX_CBS_SELFBOOT_MSG          = 0x00050009;
-const uint64_t MAILBOX_CBS_DEBUG_PERV_CLK        = 0x0005000B;
-const uint64_t MAILBOX_ROOTCTRL0                 = 0x00050010;
-const uint64_t MAILBOX_ROOTCTRL1                 = 0x00050011;
-const uint64_t MAILBOX_ROOTCTRL2                 = 0x00050012;
-const uint64_t MAILBOX_ROOTCTRL3                 = 0x00050013;
-const uint64_t MAILBOX_ROOTCTRL4                 = 0x00050014;
-const uint64_t MAILBOX_ROOTCTRL5                 = 0x00050015;
-const uint64_t MAILBOX_ROOTCTRL6                 = 0x00050016;
-const uint64_t MAILBOX_ROOTCTRL7                 = 0x00050017;
-const uint64_t MAILBOX_ROOTCTRL8                 = 0x00050018;
-const uint64_t MAILBOX_PERVCTRL0                 = 0x0005001A;
-const uint64_t MAILBOX_PERVCTRL1                 = 0x0005001B;
-const uint64_t MAILBOX_SCRATCH_REG_1             = 0x00050038;
-const uint64_t MAILBOX_SCRATCH_REG_2             = 0x00050039;
-const uint64_t MAILBOX_SCRATCH_REG_3             = 0x0005003A;
-const uint64_t MAILBOX_SCRATCH_REG_4             = 0x0005003B;
-const uint64_t MAILBOX_SCRATCH_REG_5             = 0x0005003C;
-const uint64_t MAILBOX_SCRATCH_REG_6             = 0x0005003D;
-const uint64_t MAILBOX_SCRATCH_REG_7             = 0x0005003E;
-const uint64_t MAILBOX_SCRATCH_REG_8             = 0x0005003F;
-const uint64_t MAILBOX_SCRATCH_REG_9             = 0x00050180;
-const uint64_t MAILBOX_SCRATCH_REG_10            = 0x00050181;
-const uint64_t MAILBOX_SCRATCH_REG_11            = 0x00050182;
-const uint64_t MAILBOX_SCRATCH_REG_12            = 0x00050183;
-const uint64_t MAILBOX_SCRATCH_REG_13            = 0x00050184;
-const uint64_t MAILBOX_SCRATCH_REG_14            = 0x00050185;
-const uint64_t MAILBOX_SCRATCH_REG_15            = 0x00050186;
-const uint64_t MAILBOX_SCRATCH_REG_16            = 0x00050187;
+const uint64_t MAILBOX_CBS_CTRL_STATUS_ODY           = 0x00050001;
+const uint64_t MAILBOX_CBS_TRACE_ODY                 = 0x00050002;
+const uint64_t MAILBOX_CBS_ENVSTAT_ODY               = 0x00050004;
+const uint64_t MAILBOX_CBS_SELFBOOT_CTRL_STATUS_ODY  = 0x00050008;
+const uint64_t MAILBOX_CBS_SELFBOOT_MSG_ODY          = 0x00050009;
+const uint64_t MAILBOX_CBS_DEBUG_PERV_CLK_ODY        = 0x0005000B;
+const uint64_t MAILBOX_ROOTCTRL0_ODY                 = 0x00050010;
+const uint64_t MAILBOX_ROOTCTRL1_ODY                 = 0x00050011;
+const uint64_t MAILBOX_ROOTCTRL2_ODY                 = 0x00050012;
+const uint64_t MAILBOX_ROOTCTRL3_ODY                 = 0x00050013;
+const uint64_t MAILBOX_ROOTCTRL4_ODY                 = 0x00050014;
+const uint64_t MAILBOX_ROOTCTRL5_ODY                 = 0x00050015;
+const uint64_t MAILBOX_ROOTCTRL6_ODY                 = 0x00050016;
+const uint64_t MAILBOX_ROOTCTRL7_ODY                 = 0x00050017;
+const uint64_t MAILBOX_ROOTCTRL8_ODY                 = 0x00050018;
+const uint64_t MAILBOX_PERVCTRL0_ODY                 = 0x0005001A;
+const uint64_t MAILBOX_PERVCTRL1_ODY                 = 0x0005001B;
+const uint64_t MAILBOX_SCRATCH_REG_1_ODY             = 0x00050038;
+const uint64_t MAILBOX_SCRATCH_REG_2_ODY             = 0x00050039;
+const uint64_t MAILBOX_SCRATCH_REG_3_ODY             = 0x0005003A;
+const uint64_t MAILBOX_SCRATCH_REG_4_ODY             = 0x0005003B;
+const uint64_t MAILBOX_SCRATCH_REG_5_ODY             = 0x0005003C;
+const uint64_t MAILBOX_SCRATCH_REG_6_ODY             = 0x0005003D;
+const uint64_t MAILBOX_SCRATCH_REG_7_ODY             = 0x0005003E;
+const uint64_t MAILBOX_SCRATCH_REG_8_ODY             = 0x0005003F;
+const uint64_t MAILBOX_SCRATCH_REG_9_ODY             = 0x00050180;
+const uint64_t MAILBOX_SCRATCH_REG_10_ODY            = 0x00050181;
+const uint64_t MAILBOX_SCRATCH_REG_11_ODY            = 0x00050182;
+const uint64_t MAILBOX_SCRATCH_REG_12_ODY            = 0x00050183;
+const uint64_t MAILBOX_SCRATCH_REG_13_ODY            = 0x00050184;
+const uint64_t MAILBOX_SCRATCH_REG_14_ODY            = 0x00050185;
+const uint64_t MAILBOX_SCRATCH_REG_15_ODY            = 0x00050186;
+const uint64_t MAILBOX_SCRATCH_REG_16_ODY            = 0x00050187;
 
-const uint64_t PIBMEM_CTRL             = 0x000D0010;
-const uint64_t PIBMEM_ADDR_PIB         = 0x000D0011;
-const uint64_t PIBMEM_STATUS           = 0x000D0015;
-const uint64_t PIBMEM_RESET            = 0x000D0016;
+const uint64_t PIBMEM_CTRL_ODY             = 0x000D0010;
+const uint64_t PIBMEM_ADDR_PIB_ODY         = 0x000D0011;
+const uint64_t PIBMEM_STATUS_ODY           = 0x000D0015;
+const uint64_t PIBMEM_RESET_ODY            = 0x000D0016;
 
 const uint64_t  SPICTL_ERR_INJECT          = 0x00070000;
 const uint64_t  SPICTL_COUNTER             = 0x00070001;

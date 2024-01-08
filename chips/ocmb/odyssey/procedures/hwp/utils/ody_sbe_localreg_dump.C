@@ -76,7 +76,7 @@ enum SBE_LREGS
 
 };
 
-std::vector<SBEReg_t> v_ody_sppe_local_regs =
+std::vector<SBE_Reg_t> v_ody_sppe_local_regs =
 {
 
     { SBE_MISC,      "SBE_MISC" },
@@ -114,11 +114,11 @@ std::vector<SBEReg_t> v_ody_sppe_local_regs =
 
 fapi2::ReturnCode ody_sbe_localreg_dump( const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target ,
         const uint16_t force_halt,
-        std::vector<SBESCOMRegValue_t>& v_sbe_local_reg_value)
+        std::vector<SBE_SCOMReg_Value_t>& v_sbe_local_reg_value)
 
 {
     fapi2::buffer<uint64_t> l_data64;
-    SBESCOMRegValue_t l_regVal;
+    SBE_SCOMReg_Value_t l_regVal;
     uint16_t address = 0 ;
     uint32_t scom_address = 0 ;
     uint64_t t_addr;

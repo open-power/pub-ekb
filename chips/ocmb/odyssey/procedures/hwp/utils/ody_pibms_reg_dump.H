@@ -47,7 +47,7 @@
 typedef fapi2::ReturnCode (*ody_pibms_reg_dump_FP_t)
 (
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>&,
-    std::vector<sRegV>& regv_set);
+    std::vector<sRegVOdy>& regv_set);
 
 extern "C"
 {
@@ -58,7 +58,7 @@ extern "C"
 /// @return FAPI2_RC_SUCCESS
     fapi2::ReturnCode
     ody_pibms_reg_dump(const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
-                       std::vector<sRegV>& regv_set);
+                       std::vector<sRegVOdy>& regv_set);
 
 } // extern C
 

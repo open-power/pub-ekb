@@ -60,16 +60,16 @@ fapi2::ReturnCode ody_pibmem_dump(
     const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
     const uint32_t i_start_byte,
     const uint32_t i_num_of_byte,
-    const user_options i_input_switches,
+    const usr_options i_input_switches,
     const bool i_ecc_enable,
-    std::vector<array_data_t>& o_pibmem_contents)
+    std::vector<pibmem_array_data_t>& o_pibmem_contents)
 {
     uint32_t start_address, num_of_address, end_address;
     uint32_t pibmem_indirect_addr;
     uint32_t PIBMEM_START_ARRAY_ADDRESS = ODY_PIBMEM_START_ARRAY_ADDRESS;
     uint32_t DEPTH_OF_ARRAY = ODY_DEPTH_OF_PIBMEM;
     bool sab, sdb;
-    array_data_t fetch_data;
+    pibmem_array_data_t fetch_data;
     fapi2::buffer<uint64_t> l_data64, l_data64_sl_clk_status, pibmem_ctrl_reg_data_org;
     fapi2::buffer<uint64_t> ctrl_reg_data;
     FSXCOMP_FSXLOG_SB_CS_t      SB_CS;
@@ -134,17 +134,17 @@ fapi2::ReturnCode ody_pibmem_dump(
     end_address    = (((i_start_byte + i_num_of_byte - 1)) / 8) + PIBMEM_START_ARRAY_ADDRESS;
     num_of_address = (end_address - start_address) + 1;
 
-    if(i_input_switches == INTERMEDIATE_TILL_INTERMEDIATE)
+    if(i_input_switches == INTERMEDIATE_TO_INTERMEDIATE)
     {}
-    else if(i_input_switches == START_TILL_INTERMEDIATE)
+    else if(i_input_switches == START_TO_INTERMEDIATE)
     {
         start_address  = PIBMEM_START_ARRAY_ADDRESS;
     }
-    else if(i_input_switches == INTERMEDIATE_TILL_END )
+    else if(i_input_switches == INTERMEDIATE_TO_END )
     {
         num_of_address = (DEPTH_OF_ARRAY + PIBMEM_START_ARRAY_ADDRESS) - start_address;
     }
-    else if(i_input_switches == START_TILL_END)
+    else if(i_input_switches == START_TO_END)
     {
         start_address  = PIBMEM_START_ARRAY_ADDRESS;
         num_of_address = DEPTH_OF_ARRAY;
@@ -158,8 +158,8 @@ fapi2::ReturnCode ody_pibmem_dump(
     for(uint32_t i = 0; i < num_of_address; i++)
     {
         FAPI_TRY(getScom(i_target, PIBMEM_AUTO_INCR_REG, l_data64));
-        fetch_data.read_addr = start_address + i;
-        fetch_data.read_data = l_data64;
+        fetch_data.rd_addr = start_address + i;
+        fetch_data.rd_data = l_data64;
         o_pibmem_contents.push_back(fetch_data);
     }
 
