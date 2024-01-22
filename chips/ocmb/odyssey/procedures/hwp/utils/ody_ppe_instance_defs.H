@@ -23,7 +23,7 @@
 /*                                                                        */
 /* IBM_PROLOG_END_TAG                                                     */
 #include <fapi2.H>
-
+#include <map>
 
 #ifndef __P10_PPE_INSTANCE_DEFS_H__
 #define __P10_PPE_INSTANCE_DEFS_H__

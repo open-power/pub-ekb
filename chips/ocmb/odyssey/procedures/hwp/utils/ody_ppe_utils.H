@@ -38,7 +38,7 @@
 
 #include <map>
 #include <fapi2.H>
-#include <ody_ppe_instance_defs.H>
+#include "ody_ppe_instance_defs.H"
 
 typedef struct
 {
@@ -327,6 +327,22 @@ enum PPE_XCR_DEFS
 };
 
 uint32_t ppe_get_reg_num(enum PPE_REGS reg);
+
+const char* ppe_get_reg_str(enum PPE_REGS reg);
+
+fapi2::ReturnCode ppe_is_halted(
+    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
+    enum PPE_TYPES i_ppe_type,
+    uint32_t i_ppe_instance_num,
+    bool& o_halted);
+fapi2::ReturnCode ppe_resume(
+    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
+    enum PPE_TYPES i_ppe_type,
+    uint32_t i_ppe_instance_num);
+
+uint32_t ppe_get_xir_vdr_flg(enum PPE_TYPES ppe_type);
+
+uint64_t ppe_get_base_addr(enum PPE_TYPES ppe_type, uint32_t ppe_instance_num );
 
 uint64_t ppe_get_xir_addr(enum PPE_TYPES ppe_type, enum PPE_XIRS_IDX xir_idx, uint32_t ppe_instance_num);
 

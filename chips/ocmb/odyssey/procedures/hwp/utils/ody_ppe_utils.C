@@ -48,10 +48,21 @@
 #include <ody_ppe_instance_defs.H>
 #include <map>
 
+
+uint64_t ppe_get_base_addr(enum PPE_TYPES ppe_type, uint32_t ppe_instance_num )
+{
+    return G_PPE_Types[ppe_type].base_address + ppe_instance_num * G_PPE_Types[ppe_type].inst_offset;
+}
+
 uint64_t ppe_get_xir_addr(enum PPE_TYPES ppe_type, enum PPE_XIRS_IDX xir_idx, uint32_t ppe_instance_num )
 {
     return G_PPE_Types[ppe_type].base_address + ppe_instance_num * G_PPE_Types[ppe_type].inst_offset +
            G_PPE_Types[ppe_type].xir_offsets[xir_idx];
+}
+
+const char* ppe_get_reg_str(enum PPE_REGS reg)
+{
+    return v_ppe_reg_names[reg];
 }
 
 uint32_t ppe_get_reg_num(enum PPE_REGS reg)
@@ -218,6 +229,51 @@ fapi2::ReturnCode poll_ppe_halt_state(
                   .set_TARGET(i_target)
                   .set_ADDRESS(t_addr),
                   "PPE Halt Timeout" );
+
+fapi_try_exit:
+    return fapi2::current_err;
+}
+
+uint32_t ppe_get_xir_vdr_flg(enum PPE_TYPES ppe_type)
+{
+    return G_PPE_Types[ppe_type].xir_vdr_flag;
+}
+
+fapi2::ReturnCode ppe_resume(
+    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
+    enum PPE_TYPES i_ppe_type,
+    uint32_t i_ppe_instance_num)
+
+{
+    fapi2::buffer<uint64_t> l_data64;
+    uint64_t t_addr;
+
+    FAPI_INF("   Resume only through XCR...");
+    l_data64.flush<0>().insertFromRight(PPE_XCR_RESUME, PPE_XCR_CMD_START, PPE_XCR_CMD_LEN);
+    t_addr = ppe_get_xir_addr(i_ppe_type, PPE_IDX_XIXCR, i_ppe_instance_num);
+    FAPI_TRY(putScom(i_target, t_addr, l_data64), "Error in PUTSCOM in XCR only resume");
+
+
+fapi_try_exit:
+    return fapi2::current_err;
+}
+
+fapi2::ReturnCode ppe_is_halted(
+    const fapi2::Target<fapi2::TARGET_TYPE_OCMB_CHIP>& i_target,
+    enum PPE_TYPES i_ppe_type,
+    uint32_t i_ppe_instance_num,
+    bool& o_halted)
+{
+    fapi2::buffer<uint64_t> l_data64;
+    uint64_t t_addr;
+
+    t_addr = ppe_get_xir_addr(i_ppe_type, PPE_IDX_XIRAMDBG, i_ppe_instance_num);
+    FAPI_TRY(getScom ( i_target,
+                       t_addr,
+                       l_data64 ),
+             "Failed reading XIRAMDBG register!" );
+
+    o_halted = l_data64.getBit<PPE_XSR_HALTED_STATE>();
 
 fapi_try_exit:
     return fapi2::current_err;
